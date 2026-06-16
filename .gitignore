@@ -1,3 +1,13 @@
+# OS
 .DS_Store
 .thumbnail
+Thumbs.db
+
+# Project scaffolding (design canvas, directions, screenshots)
+design-canvas.jsx
+directionA.jsx
+support.js
+Canvas.dc.html
+.design-canvas.state.json
 screenshots/
+.thumbnail/

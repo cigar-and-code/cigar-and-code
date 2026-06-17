@@ -1,220 +1,807 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smoke &amp; Code — Free AI Coding Meetup · Pharr, TX</title>
-<meta name="description" content="A free, in-person AI coding meetup in the Rio Grande Valley. Learn to build real software with AI. All skill levels welcome.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
-<!-- Design tokens. Extract :root vars from here into your CSS/Tailwind config. -->
-<link rel="stylesheet" href="tokens.css">
-<style>
-/* Tokens live in tokens.css — imported above. */
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smoke &amp; Code — Free AI Coding Meetup · Pharr, TX</title>
+    <meta
+      name="description"
+      content="A free, in-person AI coding meetup in the Rio Grande Valley. Learn to build real software with AI. All skill levels welcome."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Design tokens. Extract :root vars from here into your CSS/Tailwind config. -->
+    <link rel="stylesheet" href="tokens.css" />
+    <style>
+      /* Tokens live in tokens.css — imported above. */
 
-/* ── Reset ───────────────────────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
-  color:var(--ink); background:var(--paper);
-  -webkit-font-smoothing:antialiased; line-height:1.55;
-}
-/* ── Demo banner ──────────────────────────── */
-.demo-banner{
-  background:linear-gradient(135deg,#f59e3c,#f15a35);
-  color:var(--ink); text-align:center;
-  padding:12px 16px; font-size:14px;
-  font-weight:700; letter-spacing:0.05em;
-  text-transform:uppercase;
-  border-bottom:2px solid var(--amber);
-}
-h1,h2,h3,h4,.display{
-  font-family:'Sora',system-ui,sans-serif;
-  letter-spacing:-0.02em; line-height:1.05;
-}
-img,svg{display:block;}
+      /* ── Reset ───────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+      }
+      /* ── Demo banner ──────────────────────────── */
+      .demo-banner {
+        background: linear-gradient(135deg, #f59e3c, #f15a35);
+        color: var(--ink);
+        text-align: center;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--amber);
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      .display {
+        font-family: "Sora", system-ui, sans-serif;
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+      }
+      img,
+      svg {
+        display: block;
+      }
 
-/* ── Utilities ───────────────────────────── */
-.wrap{max-width:1120px;margin:0 auto;padding:0 48px;}
-.es{font-style:italic;color:var(--coral-deep);}
+      /* ── Utilities ───────────────────────────── */
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 48px;
+      }
+      .es {
+        font-style: italic;
+        color: var(--coral-deep);
+      }
 
-/* ── Buttons ─────────────────────────────── */
-.btn{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:15px;
-  border:none;cursor:pointer;border-radius:999px;padding:12px 22px;
-  transition:transform .15s,box-shadow .15s;text-decoration:none;
-}
-.btn-primary{background:var(--coral);color:#fff;box-shadow:0 6px 18px rgba(241,90,53,.28);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(241,90,53,.34);}
-.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line);}
-.btn-ghost:hover{border-color:var(--ink);}
-.btn-lg{padding:16px 30px;font-size:16.5px;}
+      /* ── Buttons ─────────────────────────────── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 12px 22px;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: var(--coral);
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(241, 90, 53, 0.28);
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(241, 90, 53, 0.34);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink);
+        border: 1.5px solid var(--line);
+      }
+      .btn-ghost:hover {
+        border-color: var(--ink);
+      }
+      .btn-lg {
+        padding: 16px 30px;
+        font-size: 16.5px;
+      }
 
-/* ── Nav ─────────────────────────────────── */
-.nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:28px 48px;max-width:1120px;margin:0 auto;
-}
-.brand{display:flex;align-items:center;gap:12px;font-family:'Sora',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.02em;text-decoration:none;color:var(--ink);}
-.mark{width:34px;height:34px;border-radius:9px;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.mark span{font-family:'Sora';font-weight:700;color:var(--paper);font-size:16px;line-height:1;}
-.navlinks{display:flex;align-items:center;gap:34px;font-size:15px;font-weight:500;color:var(--ink-2);}
-.navlinks a{color:inherit;text-decoration:none;transition:color .15s;}
-.navlinks a:hover{color:var(--ink);}
+      /* ── Nav ─────────────────────────────────── */
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 48px;
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Sora", sans-serif;
+        font-weight: 700;
+        font-size: 19px;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .mark span {
+        font-family: "Sora";
+        font-weight: 700;
+        color: var(--paper);
+        font-size: 16px;
+        line-height: 1;
+      }
+      .navlinks {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--ink-2);
+      }
+      .navlinks a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .navlinks a:hover {
+        color: var(--ink);
+      }
 
-/* ── Hero ────────────────────────────────── */
-.hero{position:relative;overflow:hidden;padding:64px 0 92px;}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:10px;white-space:nowrap;
-  font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--coral-deep);background:var(--sand);border:1px solid var(--line);
-  padding:8px 15px;border-radius:999px;margin-bottom:26px;
-}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--coral);flex-shrink:0;}
-.hero h1{font-size:74px;font-weight:700;margin-bottom:14px;}
-.hero .sub-es{font-family:'Sora';font-size:27px;font-weight:600;color:var(--coral);font-style:italic;letter-spacing:-0.01em;margin-bottom:26px;}
-.hero p.lede{font-size:19px;color:var(--ink-2);max-width:520px;margin-bottom:34px;text-wrap:pretty;}
-.cta-row{display:flex;gap:14px;align-items:center;margin-bottom:34px;}
-.meta-row{display:flex;gap:26px;flex-wrap:wrap;}
-.meta{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:500;color:var(--ink-2);}
-.meta svg{flex-shrink:0;color:var(--coral-deep);}
+      /* ── Hero ────────────────────────────────── */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 64px 0 92px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 56px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        background: var(--sand);
+        border: 1px solid var(--line);
+        padding: 8px 15px;
+        border-radius: 999px;
+        margin-bottom: 26px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--coral);
+        flex-shrink: 0;
+      }
+      .hero h1 {
+        font-size: 74px;
+        font-weight: 700;
+        margin-bottom: 14px;
+      }
+      .hero .sub-es {
+        font-family: "Sora";
+        font-size: 27px;
+        font-weight: 600;
+        color: var(--coral);
+        font-style: italic;
+        letter-spacing: -0.01em;
+        margin-bottom: 26px;
+      }
+      .hero p.lede {
+        font-size: 19px;
+        color: var(--ink-2);
+        max-width: 520px;
+        margin-bottom: 34px;
+        text-wrap: pretty;
+      }
+      .cta-row {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        margin-bottom: 34px;
+      }
+      .meta-row {
+        display: flex;
+        gap: 26px;
+        flex-wrap: wrap;
+      }
+      .meta {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink-2);
+      }
+      .meta svg {
+        flex-shrink: 0;
+        color: var(--coral-deep);
+      }
 
-/* Hero art panel */
-.hero-art{position:relative;height:420px;border-radius:24px;background:linear-gradient(150deg,#fff3ec,#fbe6d6);border:1px solid var(--line);overflow:hidden;}
-.blob{position:absolute;border-radius:50%;}
-.b1{width:230px;height:230px;right:-50px;top:-50px;background:radial-gradient(circle at 30% 30%,var(--amber),var(--coral));opacity:.9;}
-.b2{width:150px;height:150px;left:-30px;bottom:-30px;background:var(--ink);opacity:.92;}
-.dots-bg{position:absolute;inset:0;background-image:radial-gradient(var(--coral) 1.4px,transparent 1.4px);background-size:22px 22px;opacity:.18;}
-.codecard{position:absolute;left:40px;top:120px;right:40px;background:#fff;border-radius:14px;box-shadow:0 18px 50px rgba(120,60,30,.16);padding:20px 22px;}
-.codecard .clabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:12px;}
-.crow{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:13.5px;line-height:2;color:var(--ink-2);}
-.crow b{color:var(--coral-deep);font-weight:600;}
-.crow .cm{color:var(--ink-3);}
+      /* Hero art panel */
+      .hero-art {
+        position: relative;
+        height: 420px;
+        border-radius: 24px;
+        background: linear-gradient(150deg, #fff3ec, #fbe6d6);
+        border: 1px solid var(--line);
+        overflow: hidden;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+      }
+      .b1 {
+        width: 230px;
+        height: 230px;
+        right: -50px;
+        top: -50px;
+        background: radial-gradient(
+          circle at 30% 30%,
+          var(--amber),
+          var(--coral)
+        );
+        opacity: 0.9;
+      }
+      .b2 {
+        width: 150px;
+        height: 150px;
+        left: -30px;
+        bottom: -30px;
+        background: var(--ink);
+        opacity: 0.92;
+      }
+      .dots-bg {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          var(--coral) 1.4px,
+          transparent 1.4px
+        );
+        background-size: 22px 22px;
+        opacity: 0.18;
+      }
+      .codecard {
+        position: absolute;
+        left: 40px;
+        top: 120px;
+        right: 40px;
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 18px 50px rgba(120, 60, 30, 0.16);
+        padding: 20px 22px;
+      }
+      .codecard .clabel {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 12px;
+      }
+      .crow {
+        font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+        font-size: 13.5px;
+        line-height: 2;
+        color: var(--ink-2);
+      }
+      .crow b {
+        color: var(--coral-deep);
+        font-weight: 600;
+      }
+      .crow .cm {
+        color: var(--ink-3);
+      }
 
-/* ── Section shell ───────────────────────── */
-.band{padding:88px 0;}
-.sand-band{background:var(--sand);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.sec-tag{font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--coral-deep);margin-bottom:16px;}
-.sec-title{font-size:42px;font-weight:700;margin-bottom:18px;}
-.sec-intro{font-size:18.5px;color:var(--ink-2);max-width:620px;text-wrap:pretty;}
+      /* ── Section shell ───────────────────────── */
+      .band {
+        padding: 88px 0;
+      }
+      .sand-band {
+        background: var(--sand);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+      .sec-tag {
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--coral-deep);
+        margin-bottom: 16px;
+      }
+      .sec-title {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+      .sec-intro {
+        font-size: 18.5px;
+        color: var(--ink-2);
+        max-width: 620px;
+        text-wrap: pretty;
+      }
 
-/* ── About ───────────────────────────────── */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
-.about-copy p{font-size:18px;color:var(--ink-2);margin-bottom:18px;text-wrap:pretty;}
-.values{display:flex;flex-direction:column;gap:18px;}
-.value{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;}
-.v-ico{width:42px;height:42px;border-radius:11px;background:var(--sand);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--coral-deep);}
-.value h4{font-family:'Sora';font-size:16.5px;font-weight:600;margin-bottom:3px;}
-.value p{font-size:14.5px;color:var(--ink-2);}
+      /* ── About ───────────────────────────────── */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: start;
+      }
+      .about-copy p {
+        font-size: 18px;
+        color: var(--ink-2);
+        margin-bottom: 18px;
+        text-wrap: pretty;
+      }
+      .values {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .value {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px 22px;
+      }
+      .v-ico {
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        background: var(--sand);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--coral-deep);
+      }
+      .value h4 {
+        font-family: "Sora";
+        font-size: 16.5px;
+        font-weight: 600;
+        margin-bottom: 3px;
+      }
+      .value p {
+        font-size: 14.5px;
+        color: var(--ink-2);
+      }
 
-/* ── Format cards ────────────────────────── */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:46px;}
-.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px 28px 32px;position:relative;transition:transform .18s,box-shadow .18s;}
-.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(120,60,30,.12);}
-.card .num{font-family:'Sora';font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;}
-.card .dur{font-weight:600;color:var(--ink-3);letter-spacing:0;text-transform:none;font-size:13px;}
-.card .step-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:#fff;}
-.card h3{font-size:24px;font-weight:700;margin-bottom:10px;}
-.card p{font-size:15.5px;color:var(--ink-2);text-wrap:pretty;}
-.card.hack{background:var(--ink);border-color:var(--ink);}
-.card.hack .num{color:var(--amber);}
-.card.hack h3{color:#fff;}
-.card.hack p{color:#cfc6bc;}
-.card.hack .dur{color:#8f857b;}
+      /* ── Format cards ────────────────────────── */
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+        margin-top: 46px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 30px 28px 32px;
+        position: relative;
+        transition:
+          transform 0.18s,
+          box-shadow 0.18s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(120, 60, 30, 0.12);
+      }
+      .card .num {
+        font-family: "Sora";
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--coral);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card .dur {
+        font-weight: 600;
+        color: var(--ink-3);
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 13px;
+      }
+      .card .step-ico {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+      .card h3 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .card p {
+        font-size: 15.5px;
+        color: var(--ink-2);
+        text-wrap: pretty;
+      }
+      .card.hack {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+      .card.hack .num {
+        color: var(--amber);
+      }
+      .card.hack h3 {
+        color: #fff;
+      }
+      .card.hack p {
+        color: #cfc6bc;
+      }
+      .card.hack .dur {
+        color: #8f857b;
+      }
 
-/* ── Next session ────────────────────────── */
-.next-card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden;display:grid;grid-template-columns:1.1fr 1fr;box-shadow:0 12px 40px rgba(120,60,30,.08);}
-.next-left{padding:46px 48px;}
-.next-date{font-family:'Sora';font-size:15px;font-weight:600;color:var(--coral-deep);letter-spacing:.02em;margin-bottom:8px;}
-.next-day{font-family:'Sora';font-size:46px;font-weight:700;letter-spacing:-0.02em;line-height:1.04;margin-bottom:6px;}
-.next-time{font-size:20px;color:var(--ink-2);font-weight:500;margin-bottom:30px;}
-.next-list{display:flex;flex-direction:column;gap:16px;margin-bottom:34px;}
-.nl{display:flex;gap:14px;align-items:flex-start;}
-.nl .ni{width:38px;height:38px;border-radius:10px;background:var(--sand);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--coral-deep);}
-.nl .nt{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:2px;}
-.nl .nv{font-size:16.5px;font-weight:500;color:var(--ink);}
-.next-right{background:linear-gradient(160deg,var(--coral),var(--coral-deep));color:#fff;padding:46px 44px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
-.ndots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.35) 1.4px,transparent 1.4px);background-size:20px 20px;opacity:.4;pointer-events:none;}
-.next-right h3{font-size:30px;font-weight:700;color:#fff;margin-bottom:12px;position:relative;}
-.next-right p{font-size:16px;color:rgba(255,255,255,.9);margin-bottom:26px;position:relative;text-wrap:pretty;}
-.btn-oncoral{background:#fff;color:var(--coral-deep);}
-.btn-oncoral:hover{transform:translateY(-2px);}
-.seats{margin-top:18px;font-size:13.5px;color:rgba(255,255,255,.85);position:relative;display:flex;align-items:center;gap:8px;}
+      /* ── Next session ────────────────────────── */
+      .next-card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        box-shadow: 0 12px 40px rgba(120, 60, 30, 0.08);
+      }
+      .next-left {
+        padding: 46px 48px;
+      }
+      .next-date {
+        font-family: "Sora";
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--coral-deep);
+        letter-spacing: 0.02em;
+        margin-bottom: 8px;
+      }
+      .next-day {
+        font-family: "Sora";
+        font-size: 46px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.04;
+        margin-bottom: 6px;
+      }
+      .next-time {
+        font-size: 20px;
+        color: var(--ink-2);
+        font-weight: 500;
+        margin-bottom: 30px;
+      }
+      .next-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 34px;
+      }
+      .nl {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+      }
+      .nl .ni {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--sand);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--coral-deep);
+      }
+      .nl .nt {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 2px;
+      }
+      .nl .nv {
+        font-size: 16.5px;
+        font-weight: 500;
+        color: var(--ink);
+      }
+      .next-right {
+        background: linear-gradient(160deg, var(--coral), var(--coral-deep));
+        color: #fff;
+        padding: 46px 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .ndots {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.35) 1.4px,
+          transparent 1.4px
+        );
+        background-size: 20px 20px;
+        opacity: 0.4;
+        pointer-events: none;
+      }
+      .next-right h3 {
+        font-size: 30px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 12px;
+        position: relative;
+      }
+      .next-right p {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 26px;
+        position: relative;
+        text-wrap: pretty;
+      }
+      .btn-oncoral {
+        background: #fff;
+        color: var(--coral-deep);
+      }
+      .btn-oncoral:hover {
+        transform: translateY(-2px);
+      }
+      .seats {
+        margin-top: 18px;
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.85);
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-/* ── FAQ / Audience ──────────────────────── */
-.faq-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start;}
-.aud-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
-.chip{font-size:14px;font-weight:600;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px;}
-.faq-item{border-bottom:1px solid var(--line);padding:22px 0;}
-.faq-item:first-child{padding-top:0;}
-.faq-q{font-family:'Sora';font-size:18.5px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:12px;}
-.faq-q .qm{color:var(--coral);font-weight:700;}
-.faq-a{font-size:16px;color:var(--ink-2);padding-left:30px;text-wrap:pretty;}
+      /* ── FAQ / Audience ──────────────────────── */
+      .faq-grid {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 64px;
+        align-items: start;
+      }
+      .aud-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+      .chip {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink);
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 9px 16px;
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--line);
+        padding: 22px 0;
+      }
+      .faq-item:first-child {
+        padding-top: 0;
+      }
+      .faq-q {
+        font-family: "Sora";
+        font-size: 18.5px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .faq-q .qm {
+        color: var(--coral);
+        font-weight: 700;
+      }
+      .faq-a {
+        font-size: 16px;
+        color: var(--ink-2);
+        padding-left: 30px;
+        text-wrap: pretty;
+      }
 
-/* ── Footer ──────────────────────────────── */
-footer{background:var(--ink);color:#cfc6bc;padding:64px 0 40px;}
-footer .brand{color:#fff;}
-footer .mark{background:var(--coral);}
-.foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1);}
-.foot-tag{font-size:15px;max-width:330px;margin-top:16px;color:#a59b90;text-wrap:pretty;}
-.foot-cols{display:flex;gap:64px;}
-.foot-col h5{font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:16px;}
-.foot-col a{display:block;color:#a59b90;text-decoration:none;font-size:15px;margin-bottom:11px;transition:color .15s;}
-.foot-col a:hover{color:#fff;}
-.foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;font-size:13.5px;color:#8a8077;}
-.foot-bottom .es-tag{color:var(--amber);}
+      /* ── Footer ──────────────────────────────── */
+      footer {
+        background: var(--ink);
+        color: #cfc6bc;
+        padding: 64px 0 40px;
+      }
+      footer .brand {
+        color: #fff;
+      }
+      footer .mark {
+        background: var(--coral);
+      }
+      .foot-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .foot-tag {
+        font-size: 15px;
+        max-width: 330px;
+        margin-top: 16px;
+        color: #a59b90;
+        text-wrap: pretty;
+      }
+      .foot-cols {
+        display: flex;
+        gap: 64px;
+      }
+      .foot-col h5 {
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 16px;
+      }
+      .foot-col a {
+        display: block;
+        color: #a59b90;
+        text-decoration: none;
+        font-size: 15px;
+        margin-bottom: 11px;
+        transition: color 0.15s;
+      }
+      .foot-col a:hover {
+        color: #fff;
+      }
+      .foot-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 28px;
+        font-size: 13.5px;
+        color: #8a8077;
+      }
+      .foot-bottom .es-tag {
+        color: var(--amber);
+      }
 
-/* ── Responsive ──────────────────────────── */
-@media(max-width:1024px){
-  .wrap,.nav{padding-left:32px;padding-right:32px;}
-  .hero h1{font-size:56px;}
-  .hero-grid,.about-grid,.faq-grid{grid-template-columns:1fr;gap:40px;}
-  .hero-art{height:280px;}
-  .foot-top{flex-direction:column;}
-  .foot-cols{gap:40px;}
-}
-@media(max-width:720px){
-  .nav{flex-direction:column;align-items:flex-start;gap:20px;}
-  .navlinks{flex-wrap:wrap;gap:16px;}
-  .hero h1{font-size:44px;}
-  .hero .sub-es{font-size:22px;}
-  .cards{grid-template-columns:1fr;}
-  .next-card{grid-template-columns:1fr;}
-  .foot-top,.foot-cols{flex-direction:column;gap:32px;}
-  .cta-row{flex-direction:column;align-items:flex-start;}
-}
-</style>
-</head>
-<body>
+      /* ── Responsive ──────────────────────────── */
+      @media (max-width: 1024px) {
+        .wrap,
+        .nav {
+          padding-left: 32px;
+          padding-right: 32px;
+        }
+        .hero h1 {
+          font-size: 56px;
+        }
+        .hero-grid,
+        .about-grid,
+        .faq-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .hero-art {
+          height: 280px;
+        }
+        .foot-top {
+          flex-direction: column;
+        }
+        .foot-cols {
+          gap: 40px;
+        }
+      }
+      @media (max-width: 720px) {
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+        }
+        .navlinks {
+          flex-wrap: wrap;
+          gap: 16px;
+        }
+        .hero h1 {
+          font-size: 44px;
+        }
+        .hero .sub-es {
+          font-size: 22px;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .next-card {
+          grid-template-columns: 1fr;
+        }
+        .foot-top,
+        .foot-cols {
+          flex-direction: column;
+          gap: 32px;
+        }
+        .cta-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Demo Banner ────────────────────────── -->
+    <div class="demo-banner">DEMO — WORK IN PROGRESS — DEMO</div>
 
-<!-- ── Demo Banner ────────────────────────── -->
-<div class="demo-banner">DEMO — WORK IN PROGRESS — DEMO</div>
-
-<!-- ============================================================
+    <!-- ============================================================
   COMPONENT: Nav
   Sticky top bar. Brand wordmark (left) + nav links + CTA (right).
   Mobile: stacks vertically at 720px.
   CTA button: .btn.btn-primary → links to #next (RSVP section).
 ============================================================ -->
-<!-- ── Nav ─────────────────────────────── -->
-<nav class="nav">
-  <a class="brand" href="/">
-    <span class="mark"><span>S</span></span>Smoke&nbsp;&amp;&nbsp;Code
-  </a>
-  <div class="navlinks">
-    <a href="#about">About</a>
-    <a href="#format">Format</a>
-    <a href="#next">Next session</a>
-    <a href="#faq">FAQ</a>
-        <a class="btn btn-primary" href="https://luma.com/hlyir7is" target="_blank" rel="noopener">RSVP — it's free</a>
-  </div>
-</nav>
+    <!-- ── Nav ─────────────────────────────── -->
+    <nav class="nav">
+      <a class="brand" href="/">
+        <span class="mark"><span>S</span></span
+        >Smoke&nbsp;&amp;&nbsp;Code
+      </a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#format">Format</a>
+        <a href="#next">Next session</a>
+        <a href="#faq">FAQ</a>
+        <a
+          class="btn btn-primary"
+          href="https://luma.com/hlyir7is"
+          target="_blank"
+          rel="noopener"
+          >RSVP — it's free</a
+        >
+      </div>
+    </nav>
 
-<!-- ============================================================
+    <!-- ============================================================
   COMPONENT: Hero
   Two-column grid (1.15fr / 0.85fr). Left: headline + CTA.
   Right: decorative art panel with floating code card.
@@ -224,132 +811,350 @@ footer .mark{background:var(--coral);}
   Code card: monospace snippet, purely decorative
   Meta row: three icon+label trust signals below CTA buttons
 ============================================================ -->
-<!-- ── Hero ────────────────────────────── -->
-<header class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">
-        <span class="dot"></span>Free · In-person · Pharr, TX
-      </span>
-      <h1>The Valley Builds<br>with AI</h1>
-      <div class="sub-es">Cigars, code, and community</div>
-      <p class="lede">A free, in-person meetup in the Rio Grande Valley where students, builders, and the curious learn to ship real software with AI. Bring a laptop, bring an idea — we'll build together.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="https://luma.com/hlyir7is" target="_blank" rel="noopener">Reserve your spot</a>
-        <a class="btn btn-ghost btn-lg" href="#format">See the format</a>
+    <!-- ── Hero ────────────────────────────── -->
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">
+            <span class="dot"></span>Free · In-person · Pharr, TX
+          </span>
+          <h1>The Valley Builds<br />with AI</h1>
+          <div class="sub-es">Cigars, code, and community</div>
+          <p class="lede">
+            A free, in-person meetup in the Rio Grande Valley where students,
+            builders, and the curious learn to ship real software with AI. Bring
+            a laptop, bring an idea — we'll build together.
+          </p>
+          <div class="cta-row">
+            <a
+              class="btn btn-primary btn-lg"
+              href="https://luma.com/hlyir7is"
+              target="_blank"
+              rel="noopener"
+              >Reserve your spot</a
+            >
+            <a class="btn btn-ghost btn-lg" href="#format">See the format</a>
+          </div>
+          <div class="meta-row">
+            <span class="meta">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              All skill levels welcome
+            </span>
+            <span class="meta">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+              Bilingual · EN / ES
+            </span>
+            <span class="meta">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"
+                />
+              </svg>
+              Always free
+            </span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="dots-bg"></div>
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+          <div class="codecard">
+            <div class="clabel">build-with-ai.session</div>
+            <div class="crow">
+              <span class="cm">// describe what you want</span>
+            </div>
+            <div class="crow"><b>build</b> "a sign-up form that emails me"</div>
+            <div class="crow"><span class="cm">// then ship it</span></div>
+            <div class="crow"><b>deploy</b> → <b>live</b> ✦</div>
+          </div>
+        </div>
       </div>
-      <div class="meta-row">
-        <span class="meta">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          All skill levels welcome
-        </span>
-        <span class="meta">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          Bilingual · EN / ES
-        </span>
-        <span class="meta">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/></svg>
-          Always free
-        </span>
-      </div>
-    </div>
-    <div class="hero-art">
-      <div class="dots-bg"></div>
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-      <div class="codecard">
-        <div class="clabel">build-with-ai.session</div>
-        <div class="crow"><span class="cm">// describe what you want</span></div>
-        <div class="crow"><b>build</b> "a sign-up form that emails me"</div>
-        <div class="crow"><span class="cm">// then ship it</span></div>
-        <div class="crow"><b>deploy</b> → <b>live</b> ✦</div>
-      </div>
-    </div>
-  </div>
-</header>
+    </header>
 
-<!-- ============================================================
+    <!-- ============================================================
   COMPONENT: About
   Sand background band. Two columns: copy (left) + value cards (right).
   Value cards: icon + heading + 1-line description. White on sand bg.
   Section tag: "What is Smoke & Code?"
 ============================================================ -->
-<!-- ── About ────────────────────────────── -->
-<section class="band sand-band" id="about">
-  <div class="wrap about-grid">
-    <div class="about-copy">
-      <div class="sec-tag">What is Smoke &amp; Code?</div>
-      <h2 class="sec-title">A room full of people<br>building the future</h2>
-      <p>Smoke &amp; Code is a community meetup for anyone in the RGV who wants to build with AI — no computer-science degree required. We meet in person at <a href="https://cigarsocietyus.com/" target="_blank" rel="noopener" style="color:var(--coral);text-decoration:underline;text-underline-offset:2px">Cigar Society</a>, open our laptops, and make something real together. Grab a cigar from the lounge, light up, and code.</p>
-      <p>No curriculum, no commitment. We're enthusiasts who wanted a place to build in person — cigars, code, and good company. Come for the full afternoon or drop in for a bit. The lounge is open either way.</p>
-    </div>
-    <div class="values">
-      <div class="value">
-        <span class="v-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg>
-        </span>
-        <div><h4>Hands-on, not a lecture</h4><p>You code along the whole time. We learn by shipping, not by watching slides.</p></div>
+    <!-- ── About ────────────────────────────── -->
+    <section class="band sand-band" id="about">
+      <div class="wrap about-grid">
+        <div class="about-copy">
+          <div class="sec-tag">What is Smoke &amp; Code?</div>
+          <h2 class="sec-title">
+            A room full of people<br />building the future
+          </h2>
+          <p>
+            Smoke &amp; Code is a community meetup for anyone in the RGV who
+            wants to build with AI — no computer-science degree required. We
+            meet in person at
+            <a
+              href="https://cigarsocietyus.com/"
+              target="_blank"
+              rel="noopener"
+              style="
+                color: var(--coral);
+                text-decoration: underline;
+                text-underline-offset: 2px;
+              "
+              >Cigar Society</a
+            >, open our laptops, and make something real together. Grab a cigar
+            from the lounge, light up, and code.
+          </p>
+          <p>
+            No curriculum, no commitment. We're enthusiasts who wanted a place
+            to build in person — cigars, code, and good company. Come for the
+            full afternoon or drop in for a bit. The lounge is open either way.
+          </p>
+          <p>
+            This first meetup is an experiment — we're testing the water to see
+            if we can build a real community in the Valley. No pressure, no
+            promises. Just show up, build something, and let's find out
+            together.
+          </p>
+        </div>
+        <div class="values">
+          <div class="value">
+            <span class="v-ico">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M13 2L3 14h8l-1 8 10-12h-8z" />
+              </svg>
+            </span>
+            <div>
+              <h4>Hands-on, not a lecture</h4>
+              <p>
+                You code along the whole time. We learn by shipping, not by
+                watching slides.
+              </p>
+            </div>
+          </div>
+          <div class="value">
+            <span class="v-ico">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <path
+                  d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                />
+              </svg>
+            </span>
+            <div>
+              <h4>Built for the Valley</h4>
+              <p>
+                Run by locals, for locals. Help is always in the room — just
+                ask.
+              </p>
+            </div>
+          </div>
+          <div class="value">
+            <span class="v-ico">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                />
+                <path
+                  d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                />
+              </svg>
+            </span>
+            <div>
+              <h4>Leave with something real</h4>
+              <p>
+                Walk out with a working project and the confidence to keep going
+                on your own.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="value">
-        <span class="v-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </span>
-        <div><h4>Built for the Valley</h4><p>Run by locals, for locals. Help is always in the room — just ask.</p></div>
-      </div>
-      <div class="value">
-        <span class="v-ico">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
-        </span>
-        <div><h4>Leave with something real</h4><p>Walk out with a working project and the confidence to keep going on your own.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
+    <!-- ============================================================
    COMPONENT: Format (Session Cards)
    Three-column card grid. Cards: Lesson 01, Lesson 02, Part 03.
    Lesson 01 & 02: white bg, coral gradient icon.
    Part 03 (.card.hack): dark ink bg, amber accent — visually distinct.
    Each card: label + duration (top) / icon / title / description.
 ============================================================ -->
-<!-- ── Format ────────────────────────────── -->
-<section class="band" id="format">
-  <div class="wrap">
-    <div class="sec-tag">The format</div>
-    <h2 class="sec-title">Three parts, one afternoon</h2>
-    <p class="sec-intro">Someone kicks things off with an idea. Then you code, you smoke, you build. At the end, the mic opens — show what you made, or just watch and steal ideas. No pressure either way.</p>
-    <div class="cards">
-      <div class="card">
-        <div class="num"><span>Lesson 01</span><span class="dur">~30 min</span></div>
-        <div class="step-ico" style="background:linear-gradient(150deg,#f59e3c,#f15a35)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h8l-1 8 10-12h-8z"/></svg>
+    <!-- ── Format ────────────────────────────── -->
+    <section class="band" id="format">
+      <div class="wrap">
+        <div class="sec-tag">The format</div>
+        <h2 class="sec-title">Three parts, one afternoon</h2>
+        <p class="sec-intro">
+          Someone kicks things off with an idea. Then you code, you smoke, you
+          build. At the end, the mic opens — show what you made, or just watch
+          and steal ideas. No pressure either way.
+        </p>
+        <div class="cards">
+          <div class="card">
+            <div class="num">
+              <span>Lesson 01</span><span class="dur">~30 min</span>
+            </div>
+            <div
+              class="step-ico"
+              style="background: linear-gradient(150deg, #f59e3c, #f15a35)"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M13 2L3 14h8l-1 8 10-12h-8z" />
+              </svg>
+            </div>
+            <h3>The Spark</h3>
+            <p>
+              Someone shares an idea, a technique, or a live demo. Tight
+              30-minute talk — no slides required, just real code and real
+              thinking to get the room going.
+            </p>
+          </div>
+          <div class="card">
+            <div class="num">
+              <span>Lesson 02</span><span class="dur">~2 hr</span>
+            </div>
+            <div
+              class="step-ico"
+              style="background: linear-gradient(150deg, #f15a35, #d8431f)"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <h3>Build &amp; Burn</h3>
+            <p>
+              Two hours of hands-on coding with a cigar in hand. Work solo or
+              pair up. Chase the idea you just heard, scratch your own itch, or
+              get unstuck with help from the room.
+            </p>
+          </div>
+          <div class="card hack">
+            <div class="num">
+              <span>Part 03</span><span class="dur">~30 min</span>
+            </div>
+            <div
+              class="step-ico"
+              style="background: linear-gradient(150deg, #f59e3c, #f15a35)"
+            >
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+                />
+                <path
+                  d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+                />
+              </svg>
+            </div>
+            <h3>Show &amp; Ship</h3>
+            <p>
+              The mic is open. Demo what you built — no judgment, no pressure.
+              Ship it if you're ready, or kick back and see what everyone else
+              made. Totally optional.
+            </p>
+          </div>
         </div>
-        <h3>The Spark</h3>
-        <p>Someone shares an idea, a technique, or a live demo. Tight 30-minute talk — no slides required, just real code and real thinking to get the room going.</p>
+        <p
+          class="sec-intro"
+          style="
+            margin-top: 28px;
+            font-size: 15px;
+            color: var(--ink-3);
+            max-width: 620px;
+          "
+        >
+          Arrive when you like, stay as long as you like. We're enthusiasts who
+          wanted a place to build together.
+        </p>
       </div>
-      <div class="card">
-        <div class="num"><span>Lesson 02</span><span class="dur">~2 hr</span></div>
-        <div class="step-ico" style="background:linear-gradient(150deg,#f15a35,#d8431f)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        </div>
-        <h3>Build &amp; Burn</h3>
-        <p>Two hours of hands-on coding with a cigar in hand. Work solo or pair up. Chase the idea you just heard, scratch your own itch, or get unstuck with help from the room.</p>
-      </div>
-      <div class="card hack">
-        <div class="num"><span>Part 03</span><span class="dur">~30 min</span></div>
-        <div class="step-ico" style="background:linear-gradient(150deg,#f59e3c,#f15a35)">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
-        </div>
-        <h3>Show &amp; Ship</h3>
-        <p>The mic is open. Demo what you built — no judgment, no pressure. Ship it if you're ready, or kick back and see what everyone else made. Totally optional.</p>
-      </div>
-    </div>
-    <p class="sec-intro" style="margin-top:28px;font-size:15px;color:var(--ink-3);max-width:620px">Arrive when you like, stay as long as you like. We're enthusiasts who wanted a place to build together.</p>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
+    <!-- ============================================================
   COMPONENT: Next Session
   Sand band. Two-panel card (.next-card): date/logistics (left) + RSVP (right).
   Left panel: date, time, location, what to bring, cost.
@@ -357,119 +1162,257 @@ footer .mark{background:var(--coral);}
     seats-remaining indicator.
   TODO: Replace date, venue, RSVP href, and seat count with live data.
 ============================================================ -->
-<!-- ── Next Session ──────────────────────── -->
-<section class="band sand-band" id="next">
-  <div class="wrap">
-    <div class="sec-tag" style="text-align:center">Next session</div>
-    <h2 class="sec-title" style="text-align:center;margin-bottom:42px">Save your seat</h2>
-    <div class="next-card">
-      <div class="next-left">
-        <div class="next-date">Saturday</div>
-        <div class="next-day">July 12, 2026</div>
-        <div class="next-time">1:00 – 4:00 PM</div>
-        <div class="next-list">
-          <div class="nl">
-            <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <div><div class="nt">Where</div>            <div class="nv"><a href="https://cigarsocietyus.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px">Cigar Society</a> · 116 W State Ave, Pharr, TX</div></div>
+    <!-- ── Next Session ──────────────────────── -->
+    <section class="band sand-band" id="next">
+      <div class="wrap">
+        <div class="sec-tag" style="text-align: center">Next session</div>
+        <h2 class="sec-title" style="text-align: center; margin-bottom: 42px">
+          Save your seat
+        </h2>
+        <div class="next-card">
+          <div class="next-left">
+            <div class="next-date">Saturday</div>
+            <div class="next-day">July 12, 2026</div>
+            <div class="next-time">1:00 – 4:00 PM</div>
+            <div class="next-list">
+              <div class="nl">
+                <span class="ni"
+                  ><svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" /></svg
+                ></span>
+                <div>
+                  <div class="nt">Where</div>
+                  <div class="nv">
+                    <a
+                      href="https://cigarsocietyus.com/"
+                      target="_blank"
+                      rel="noopener"
+                      style="
+                        color: inherit;
+                        text-decoration: underline;
+                        text-underline-offset: 2px;
+                      "
+                      >Cigar Society</a
+                    >
+                    · 116 W State Ave, Pharr, TX
+                  </div>
+                </div>
+              </div>
+              <div class="nl">
+                <span class="ni"
+                  ><svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                    />
+                    <path d="M3 6h18M16 10a4 4 0 0 1-8 0" /></svg
+                ></span>
+                <div>
+                  <div class="nt">Bring</div>
+                  <div class="nv">A laptop, a charger, and curiosity</div>
+                </div>
+              </div>
+              <div class="nl">
+                <span class="ni"
+                  ><svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"
+                    /></svg
+                ></span>
+                <div>
+                  <div class="nt">Cost</div>
+                  <div class="nv">
+                    Free to attend — cigars available for purchase at the lounge
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="nl">
-            <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span>
-            <div><div class="nt">Bring</div><div class="nv">A laptop, a charger, and curiosity</div></div>
-          </div>
-          <div class="nl">
-            <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/></svg></span>
-            <div><div class="nt">Cost</div><div class="nv">Free to attend — cigars available for purchase at the lounge</div></div>
+          <div class="next-right">
+            <div class="ndots"></div>
+            <h3>Seats are limited</h3>
+            <p>
+              We keep sessions small so everyone gets help. Grab a spot before
+              they're gone — it only takes a minute.
+            </p>
+            <a
+              class="btn btn-oncoral btn-lg"
+              href="https://luma.com/hlyir7is"
+              target="_blank"
+              rel="noopener"
+              >Reserve your spot →</a
+            >
+            <div class="seats">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              <span>32 of 50 seats left for July</span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="next-right">
-        <div class="ndots"></div>
-        <h3>Seats are limited</h3>
-        <p>We keep sessions small so everyone gets help. Grab a spot before they're gone — it only takes a minute.</p>
-        <a class="btn btn-oncoral btn-lg" href="https://luma.com/hlyir7is" target="_blank" rel="noopener">Reserve your spot →</a>
-        <div class="seats">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>32 of 50 seats left for July</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
+    <!-- ============================================================
   COMPONENT: FAQ + Audience
   Two columns: audience callout (left) + FAQ list (right).
   Audience chips: pill tags listing who the meetup is for.
   FAQ items: Q prefix in coral, answer indented. Separated by border-bottom.
   Expandable accordion behavior can be added — currently static.
 ============================================================ -->
-<!-- ── FAQ / Audience ────────────────────── -->
-<section class="band" id="faq">
-  <div class="wrap faq-grid">
-    <div>
-      <div class="sec-tag">Who's it for</div>
-      <h2 class="sec-title" style="font-size:36px">Everyone, honestly</h2>
-      <p class="sec-intro" style="font-size:17px">If you're curious about building with AI, you belong here. No experience needed — just show up.</p>
-      <div class="aud-chips">
-        <span class="chip">Students</span>
-        <span class="chip">Career-changers</span>
-        <span class="chip">Founders</span>
-        <span class="chip">Designers</span>
-        <span class="chip">Total beginners</span>
-        <span class="chip">Tinkerers</span>
+    <!-- ── FAQ / Audience ────────────────────── -->
+    <section class="band" id="faq">
+      <div class="wrap faq-grid">
+        <div>
+          <div class="sec-tag">Who's it for</div>
+          <h2 class="sec-title" style="font-size: 36px">Everyone, honestly</h2>
+          <p class="sec-intro" style="font-size: 17px">
+            If you're curious about building with AI, you belong here. No
+            experience needed — just show up.
+          </p>
+          <div class="aud-chips">
+            <span class="chip">Students</span>
+            <span class="chip">Career-changers</span>
+            <span class="chip">Founders</span>
+            <span class="chip">Designers</span>
+            <span class="chip">Total beginners</span>
+            <span class="chip">Tinkerers</span>
+          </div>
+        </div>
+        <div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span class="qm">Q.</span>Is it really free?
+            </div>
+            <div class="faq-a">Yes — completely. No fees, no catch.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span class="qm">Q.</span>Do I need to know how to code?
+            </div>
+            <div class="faq-a">
+              Nope. Many people come with zero experience. That's exactly who
+              these sessions are built for.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span class="qm">Q.</span>Do you offer help in Spanish?
+            </div>
+            <div class="faq-a">
+              Yes, just ask. We always have bilingual folks in the room happy to
+              help in either language.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span class="qm">Q.</span>What should I bring?
+            </div>
+            <div class="faq-a">
+              A laptop and a charger. We'll help you set up everything else when
+              you arrive.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span class="qm">Q.</span>Can I bring a friend?
+            </div>
+            <div class="faq-a">
+              Please do. Just have them RSVP too so we can save enough seats and
+              snacks.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">
+              <span class="qm">Q.</span>Can I come late or leave early?
+            </div>
+            <div class="faq-a">
+              Of course. We're here for the afternoon — join when it suits you.
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      <div class="faq-item"><div class="faq-q"><span class="qm">Q.</span>Is it really free?</div><div class="faq-a">Yes — completely. No fees, no catch. Food and drinks are on us too.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="qm">Q.</span>Do I need to know how to code?</div><div class="faq-a">Nope. Many people come with zero experience. That's exactly who these sessions are built for.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="qm">Q.</span>Do you offer help in Spanish?</div><div class="faq-a">Yes, just ask. We always have bilingual folks in the room happy to help in either language.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="qm">Q.</span>What should I bring?</div><div class="faq-a">A laptop and a charger. We'll help you set up everything else when you arrive.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="qm">Q.</span>Can I bring a friend?</div><div class="faq-a">Please do. Just have them RSVP too so we can save enough seats and snacks.</div></div>
-      <div class="faq-item"><div class="faq-q"><span class="qm">Q.</span>Can I come late or leave early?</div><div class="faq-a">Of course. We're here for the afternoon — join when it suits you.</div></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- ============================================================
+    <!-- ============================================================
   COMPONENT: Footer
   Dark ink background. Two rows:
   Top: brand + tagline (left) / two link columns (right).
   Bottom: copyright (left) / tagline (right).
   Colors invert from body — brand mark uses --coral, links use #a59b90.
 ============================================================ -->
-<!-- ── Footer ────────────────────────────── -->
-<footer>
-  <div class="wrap">
-    <div class="foot-top">
-      <div>
-        <a class="brand" href="/">
-          <span class="mark"><span>S</span></span>Smoke&nbsp;&amp;&nbsp;Code
-        </a>
-        <p class="foot-tag">A free, in-person AI coding meetup in the Rio Grande Valley. Come build something with us.</p>
-      </div>
-      <div class="foot-cols">
-        <div class="foot-col">
-          <h5>Meetup</h5>
-          <a href="#about">About</a>
-          <a href="#format">Format</a>
-          <a href="#next">Next session</a>
-          <a href="#faq">FAQ</a>
+    <!-- ── Footer ────────────────────────────── -->
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div>
+            <a class="brand" href="/">
+              <span class="mark"><span>S</span></span
+              >Smoke&nbsp;&amp;&nbsp;Code
+            </a>
+            <p class="foot-tag">
+              A free, in-person AI coding meetup in the Rio Grande Valley. Come
+              build something with us.
+            </p>
+          </div>
+          <div class="foot-cols">
+            <div class="foot-col">
+              <h5>Meetup</h5>
+              <a href="#about">About</a>
+              <a href="#format">Format</a>
+              <a href="#next">Next session</a>
+              <a href="#faq">FAQ</a>
+            </div>
+            <div class="foot-col">
+              <h5>Connect</h5>
+              <a href="#">Instagram</a>
+              <a href="#">WhatsApp group</a>
+              <a href="#">Email us</a>
+              <a href="#">Become a sponsor</a>
+            </div>
+          </div>
         </div>
-        <div class="foot-col">
-          <h5>Connect</h5>
-          <a href="#">Instagram</a>
-          <a href="#">WhatsApp group</a>
-          <a href="#">Email us</a>
-          <a href="#">Become a sponsor</a>
+        <div class="foot-bottom">
+          <span>© 2026 Smoke &amp; Code · Pharr, TX</span>
+          <span class="es-tag">Made in the RGV 🌴</span>
         </div>
       </div>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 Smoke &amp; Code · Pharr, TX</span>
-      <span class="es-tag">Made in the RGV 🌴</span>
-    </div>
-  </div>
-</footer>
-
-</body>
+    </footer>
+  </body>
 </html>

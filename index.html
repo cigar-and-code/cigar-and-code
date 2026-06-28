@@ -1,1435 +1,1548 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smoke &amp; Code — Free AI Coding Meetup · Pharr, TX</title>
-  <meta name="description"
-    content="A free, in-person AI coding meetup in the Rio Grande Valley. Learn to build real software with AI. All skill levels welcome." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
-    rel="stylesheet" />
-  <!-- Design tokens. Extract :root vars from here into your CSS/Tailwind config. -->
-  <link rel="stylesheet" href="tokens.css" />
-  <style>
-    /* Tokens live in tokens.css — imported above. */
-
-    /* ── Reset ───────────────────────────────── */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-      color: var(--ink);
-      background: var(--paper);
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.55;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    .display {
-      font-family: "Sora", system-ui, sans-serif;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
-    }
-
-    img,
-    svg {
-      display: block;
-    }
-
-    /* ── Utilities ───────────────────────────── */
-    .wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-
-    .es {
-      font-style: italic;
-      color: var(--coral-deep);
-    }
-
-    /* ── Buttons ─────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-family: "Plus Jakarta Sans", sans-serif;
-      font-weight: 600;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      border-radius: 999px;
-      padding: 12px 22px;
-      transition:
-        transform 0.15s,
-        box-shadow 0.15s;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--coral);
-      color: #fff;
-      box-shadow: 0 6px 18px rgba(241, 90, 53, 0.28);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 26px rgba(241, 90, 53, 0.34);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--ink);
-      border: 1.5px solid var(--line);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--ink);
-    }
-
-    .btn-lg {
-      padding: 16px 30px;
-      font-size: 16.5px;
-    }
-
-    /* ── Nav ─────────────────────────────────── */
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 28px 48px;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: "Sora", sans-serif;
-      font-weight: 700;
-      font-size: 19px;
-      letter-spacing: -0.02em;
-      text-decoration: none;
-      color: var(--ink);
-    }
-
-    .mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 9px;
-      background: var(--ink);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .mark span {
-      font-family: "Sora";
-      font-weight: 700;
-      color: var(--paper);
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .navlinks {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--ink-2);
-    }
-
-    .navlinks a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .navlinks a:hover {
-      color: var(--ink);
-    }
-
-    /* ── Hero ────────────────────────────────── */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 64px 0 92px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--coral-deep);
-      background: var(--sand);
-      border: 1px solid var(--line);
-      padding: 8px 15px;
-      border-radius: 999px;
-      margin-bottom: 26px;
-    }
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--coral);
-      flex-shrink: 0;
-    }
-
-    .hero h1 {
-      font-size: 74px;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .hero .sub-es {
-      font-family: "Sora";
-      font-size: 27px;
-      font-weight: 600;
-      color: var(--coral);
-      font-style: italic;
-      letter-spacing: -0.01em;
-      margin-bottom: 26px;
-    }
-
-    .hero p.lede {
-      font-size: 19px;
-      color: var(--ink-2);
-      max-width: 520px;
-      margin-bottom: 34px;
-      text-wrap: pretty;
-    }
-
-    .cta-row {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 34px;
-    }
-
-    .meta-row {
-      display: flex;
-      gap: 26px;
-      flex-wrap: wrap;
-    }
-
-    .meta {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 14.5px;
-      font-weight: 500;
-      color: var(--ink-2);
-    }
-
-    .meta svg {
-      flex-shrink: 0;
-      color: var(--coral-deep);
-    }
-
-    /* Hero art panel */
-    .hero-art {
-      position: relative;
-      height: 420px;
-      border-radius: 24px;
-      background: linear-gradient(150deg, #fff3ec, #fbe6d6);
-      border: 1px solid var(--line);
-      overflow: hidden;
-    }
-
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-    }
-
-    .b1 {
-      width: 230px;
-      height: 230px;
-      right: -50px;
-      top: -50px;
-      background: radial-gradient(circle at 30% 30%,
-          var(--amber),
-          var(--coral));
-      opacity: 0.9;
-    }
-
-    .b2 {
-      width: 150px;
-      height: 150px;
-      left: -30px;
-      bottom: -30px;
-      background: var(--ink);
-      opacity: 0.92;
-    }
-
-    .dots-bg {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(var(--coral) 1.4px,
-          transparent 1.4px);
-      background-size: 22px 22px;
-      opacity: 0.18;
-    }
-
-    .codecard {
-      position: absolute;
-      left: 40px;
-      top: 120px;
-      right: 40px;
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 18px 50px rgba(120, 60, 30, 0.16);
-      padding: 20px 22px;
-    }
-
-    .codecard .clabel {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-      margin-bottom: 12px;
-    }
-
-    .crow {
-      font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
-      font-size: 13.5px;
-      line-height: 2;
-      color: var(--ink-2);
-    }
-
-    .crow b {
-      color: var(--coral-deep);
-      font-weight: 600;
-    }
-
-    .crow .cm {
-      color: var(--ink-3);
-    }
-
-    /* ── Section shell ───────────────────────── */
-    .band {
-      padding: 88px 0;
-    }
-
-    .sand-band {
-      background: var(--sand);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .sec-tag {
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--coral-deep);
-      margin-bottom: 16px;
-    }
-
-    .sec-title {
-      font-size: 42px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    .sec-intro {
-      font-size: 18.5px;
-      color: var(--ink-2);
-      max-width: 620px;
-      text-wrap: pretty;
-    }
-
-    /* ── About ───────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .about-copy p {
-      font-size: 18px;
-      color: var(--ink-2);
-      margin-bottom: 18px;
-      text-wrap: pretty;
-    }
-
-    .values {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .value {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 20px 22px;
-    }
-
-    .v-ico {
-      width: 42px;
-      height: 42px;
-      border-radius: 11px;
-      background: var(--sand);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--coral-deep);
-    }
-
-    .value h4 {
-      font-family: "Sora";
-      font-size: 16.5px;
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-
-    .value p {
-      font-size: 14.5px;
-      color: var(--ink-2);
-    }
-
-    /* ── Format cards ────────────────────────── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin-top: 46px;
-    }
-
-    .card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 30px 28px 32px;
-      position: relative;
-      transition:
-        transform 0.18s,
-        box-shadow 0.18s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(120, 60, 30, 0.12);
-    }
-
-    .card .num {
-      font-family: "Sora";
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--coral);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card .dur {
-      font-weight: 600;
-      color: var(--ink-3);
-      letter-spacing: 0;
-      text-transform: none;
-      font-size: 13px;
-    }
-
-    .card .step-ico {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      color: #fff;
-    }
-
-    .card h3 {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      font-size: 15.5px;
-      color: var(--ink-2);
-      text-wrap: pretty;
-    }
-
-    .card.hack {
-      background: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .card.hack .num {
-      color: var(--amber);
-    }
-
-    .card.hack h3 {
-      color: #fff;
-    }
-
-    .card.hack p {
-      color: #cfc6bc;
-    }
-
-    .card.hack .dur {
-      color: #8f857b;
-    }
-
-    /* ── Sessions scroller ───────────────────── */
-    .sessions-scroller {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      scroll-snap-type: x proximity;
-      padding: 6px 2px 22px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--coral) transparent;
-    }
-
-    .sessions-scroller::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .sessions-scroller::-webkit-scrollbar-thumb {
-      background: var(--coral);
-      border-radius: 999px;
-    }
-
-    .session-card {
-      flex: 0 0 400px;
-      scroll-snap-align: center;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 40px 40px 36px;
-      box-shadow: 0 12px 40px rgba(120, 60, 30, 0.08);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ses-status {
-      align-self: flex-start;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: "Sora";
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 13px;
-      border-radius: 999px;
-      margin-bottom: 22px;
-      position: relative;
-    }
-
-    .ses-topic {
-      font-family: "Sora";
-      font-size: 17px;
-      font-weight: 600;
-      margin-bottom: 26px;
-      position: relative;
-    }
-
-    .next-date {
-      font-family: "Sora";
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--coral-deep);
-      letter-spacing: 0.02em;
-      margin-bottom: 8px;
-    }
-
-    .next-day {
-      font-family: "Sora";
-      font-size: 40px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.04;
-      margin-bottom: 6px;
-    }
-
-    .next-time {
-      font-size: 19px;
-      color: var(--ink-2);
-      font-weight: 500;
-      margin-bottom: 26px;
-    }
-
-    .next-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .nl {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .nl .ni {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--sand);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--coral-deep);
-    }
-
-    .nl .nt {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-      margin-bottom: 2px;
-    }
-
-    .nl .nv {
-      font-size: 16.5px;
-      font-weight: 500;
-      color: var(--ink);
-    }
-
-    /* Completed (past) session */
-    .session-card.is-done {
-      background: rgba(255, 255, 255, 0.55);
-      border-color: var(--line);
-      box-shadow: none;
-      opacity: 0.82;
-    }
-
-    .is-done .ses-status {
-      background: rgba(60, 40, 28, 0.08);
-      color: var(--ink-3);
-    }
-
-    .is-done .next-day,
-    .is-done .ses-topic {
-      color: var(--ink-2);
-    }
-
-    /* Upcoming (highlighted) session */
-    .session-card.is-next {
-      background: linear-gradient(160deg, var(--coral), var(--coral-deep));
-      border-color: transparent;
-      color: #fff;
-    }
-
-    .ndots {
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.35) 1.4px,
-          transparent 1.4px);
-      background-size: 20px 20px;
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .is-next .ses-status {
-      background: rgba(255, 255, 255, 0.22);
-      color: #fff;
-    }
-
-    .is-next .next-date {
-      color: rgba(255, 255, 255, 0.92);
-    }
-
-    .is-next .next-day,
-    .is-next .ses-topic {
-      color: #fff;
-    }
-
-    .is-next .next-time {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .is-next .nl .ni {
-      background: rgba(255, 255, 255, 0.18);
-      color: #fff;
-    }
-
-    .is-next .nl .nt {
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    .is-next .nl .nv {
-      color: #fff;
-    }
-
-    .btn-oncoral {
-      background: #fff;
-      color: var(--coral-deep);
-    }
-
-    .btn-oncoral:hover {
-      transform: translateY(-2px);
-    }
-
-    .seats {
-      margin-top: 18px;
-      font-size: 13.5px;
-      color: rgba(255, 255, 255, 0.85);
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* ── FAQ / Audience ──────────────────────── */
-    .faq-grid {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .aud-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 22px;
-    }
-
-    .chip {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink);
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 9px 16px;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid var(--line);
-      padding: 22px 0;
-    }
-
-    .faq-item:first-child {
-      padding-top: 0;
-    }
-
-    .faq-q {
-      font-family: "Sora";
-      font-size: 18.5px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .faq-q .qm {
-      color: var(--coral);
-      font-weight: 700;
-    }
-
-    .faq-a {
-      font-size: 16px;
-      color: var(--ink-2);
-      padding-left: 30px;
-      text-wrap: pretty;
-    }
-
-    /* ── Footer ──────────────────────────────── */
-    footer {
-      background: var(--ink);
-      color: #cfc6bc;
-      padding: 64px 0 40px;
-    }
-
-    footer .brand {
-      color: #fff;
-    }
-
-    footer .mark {
-      background: var(--coral);
-    }
-
-    .foot-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .foot-tag {
-      font-size: 15px;
-      max-width: 330px;
-      margin-top: 16px;
-      color: #a59b90;
-      text-wrap: pretty;
-    }
-
-    .foot-cols {
-      display: flex;
-      gap: 64px;
-    }
-
-    .foot-col h5 {
-      font-size: 12.5px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .foot-col a {
-      display: block;
-      color: #a59b90;
-      text-decoration: none;
-      font-size: 15px;
-      margin-bottom: 11px;
-      transition: color 0.15s;
-    }
-
-    .foot-col a:hover {
-      color: #fff;
-    }
-
-    .foot-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 28px;
-      font-size: 13.5px;
-      color: #8a8077;
-    }
-
-    .foot-bottom .es-tag {
-      color: var(--amber);
-    }
-
-    /* ── Responsive ──────────────────────────── */
-    @media (max-width: 1024px) {
-
-      .wrap,
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smoke &amp; Code — Free AI Coding Meetup · Pharr, TX</title>
+    <meta
+      name="description"
+      content="A free, in-person AI coding meetup in the Rio Grande Valley. Learn to build real software with AI. All skill levels welcome."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tokens.css" />
+    <style>
+      /* ── Reset ─────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        color: var(--ink);
+        background: var(--paper);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--font-display);
+        letter-spacing: -0.025em;
+        line-height: 1.05;
+      }
+      img,
+      svg {
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ── Utilities ──────────────────────────────── */
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 48px;
+      }
+
+      /* ── Scroll reveal ──────────────────────────── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      /* ── Sticky section index (CSSDA editorial detail) ── */
+      .sec-index {
+        position: fixed;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 80;
+        writing-mode: vertical-rl;
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .sec-index.is-active {
+        opacity: 1;
+      }
+      .sec-index .si-line {
+        width: 1px;
+        height: 28px;
+        background: var(--line);
+        flex-shrink: 0;
+      }
+
+      /* ── Buttons ────────────────────────────────── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-body);
+        font-weight: 600;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 999px;
+        padding: 13px 24px;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s,
+          background 0.15s,
+          border-color 0.15s;
+        text-decoration: none;
+        line-height: 1;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(255, 106, 61, 0.3);
+      }
+      .btn-primary:hover {
+        background: var(--accent-deep);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(255, 106, 61, 0.38);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink);
+        border: 1.5px solid var(--line);
+      }
+      .btn-ghost:hover {
+        border-color: var(--ink-2);
+      }
+      .btn-lg {
+        padding: 15px 30px;
+        font-size: 16px;
+      }
+
+      /* ── Nav ────────────────────────────────────── */
       .nav {
-        padding-left: 32px;
-        padding-right: 32px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 48px;
+        height: 64px;
+        background: rgba(247, 244, 238, 0.88);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s;
       }
-
-      .hero h1 {
-        font-size: 56px;
+      .nav.scrolled {
+        border-bottom-color: var(--line);
       }
-
-      .hero-grid,
-      .about-grid,
-      .faq-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 17px;
+        letter-spacing: -0.02em;
+        color: var(--ink);
       }
-
-      .hero-art {
-        height: 280px;
+      .mark {
+        width: 30px;
+        height: 30px;
+        border-radius: 7px;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
       }
-
-      .foot-top {
-        flex-direction: column;
+      .mark span {
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--paper);
+        font-size: 14px;
+        line-height: 1;
       }
-
-      .foot-cols {
-        gap: 40px;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
       .navlinks {
-        flex-wrap: wrap;
-        gap: 16px;
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        font-size: 14.5px;
+        font-weight: 500;
+        color: var(--ink-2);
+      }
+      .navlinks a:not(.btn) {
+        transition: color 0.15s;
+      }
+      .navlinks a:not(.btn):hover {
+        color: var(--ink);
+      }
+
+      /* ── Hero ───────────────────────────────────── */
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        padding: 80px 0 72px;
+      }
+
+      /* Hairline editorial column grid */
+      .hero-grid-bg {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: repeating-linear-gradient(
+          90deg,
+          transparent 0,
+          transparent 79px,
+          rgba(20, 17, 14, 0.055) 79px,
+          rgba(20, 17, 14, 0.055) 80px
+        );
+      }
+
+      /* SVG topographic contour lines */
+      .contour-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      .contour-svg path {
+        fill: none;
+        stroke: var(--ink);
+        stroke-width: 1;
+        opacity: 0.065;
+      }
+
+      /* Accent gradient wash */
+      .hero-wash {
+        position: absolute;
+        right: -10%;
+        top: -15%;
+        width: 55%;
+        height: 75%;
+        border-radius: 50%;
+        background: radial-gradient(
+          ellipse at center,
+          rgba(255, 106, 61, 0.1) 0%,
+          rgba(255, 106, 61, 0.04) 50%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        position: relative;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 32px;
+      }
+      .eyebrow .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
       }
 
       .hero h1 {
-        font-size: 44px;
+        font-size: clamp(52px, 8.5vw, 108px);
+        font-weight: 700;
+        line-height: 0.93;
+        letter-spacing: -0.04em;
+        margin-bottom: 28px;
+        max-width: 12ch;
       }
 
-      .hero .sub-es {
-        font-size: 22px;
+      .hero-sub {
+        font-family: var(--font-display);
+        font-size: clamp(17px, 1.8vw, 22px);
+        font-weight: 500;
+        color: var(--accent);
+        margin-bottom: 6px;
       }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .session-card {
-        flex-basis: 84vw;
-        padding: 34px 28px 30px;
-      }
-
-      .next-day {
-        font-size: 34px;
-      }
-
-      .foot-top,
-      .foot-cols {
-        flex-direction: column;
-        gap: 32px;
+      .hero p.lede {
+        font-size: clamp(15px, 1.3vw, 18.5px);
+        color: var(--ink-2);
+        max-width: 520px;
+        margin-bottom: 36px;
+        text-wrap: pretty;
+        line-height: 1.65;
       }
 
       .cta-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 52px;
+      }
+
+      /* Hero meta strip */
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 1px solid var(--line);
+        padding-top: 28px;
+        gap: 0;
+      }
+      .hero-meta-item {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        padding-right: 28px;
+        margin-right: 28px;
+        border-right: 1px solid var(--line);
+      }
+      .hero-meta-item:last-child {
+        border-right: none;
+        padding-right: 0;
+        margin-right: 0;
+      }
+      .hero-meta-item span {
+        display: block;
+        margin-top: 5px;
+        font-family: var(--font-body);
+        font-size: 13.5px;
+        font-weight: 500;
+        letter-spacing: 0;
+        text-transform: none;
+        color: var(--ink-2);
+      }
+
+      /* ── Section shells ─────────────────────────── */
+      .band {
+        padding: 96px 0;
+      }
+      .band-tinted {
+        background: var(--paper-2);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .sec-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 20px;
+      }
+
+      .sec-title {
+        font-size: clamp(30px, 4vw, 46px);
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      .sec-intro {
+        font-size: 18px;
+        color: var(--ink-2);
+        max-width: 600px;
+        text-wrap: pretty;
+        line-height: 1.65;
+      }
+
+      /* ── About ──────────────────────────────────── */
+      .about-layout {
+        display: grid;
+        grid-template-columns: 1fr 0.9fr;
+        gap: 80px;
+        align-items: start;
+      }
+      .about-statement {
+        font-family: var(--font-display);
+        font-size: clamp(24px, 2.5vw, 34px);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        margin-top: 20px;
+        margin-bottom: 24px;
+      }
+      .about-statement em {
+        font-style: normal;
+        color: var(--accent);
+      }
+
+      .about-body p {
+        font-size: 17px;
+        color: var(--ink-2);
+        margin-bottom: 18px;
+        text-wrap: pretty;
+        line-height: 1.68;
+      }
+      .about-body a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .values {
+        display: flex;
         flex-direction: column;
+        margin-top: 115px;
+      }
+      .value {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .value:first-child {
+        border-top: 1px solid var(--line);
+      }
+      .v-idx {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.1em;
+        color: var(--ink-3);
+        padding-top: 3px;
+        flex-shrink: 0;
+        width: 22px;
+      }
+      .value h4 {
+        font-family: var(--font-display);
+        font-size: 16.5px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 5px;
+      }
+      .value p {
+        font-size: 14.5px;
+        color: var(--ink-2);
+      }
+
+      /* ── Format ─────────────────────────────────── */
+      .format-list {
+        margin-top: 56px;
+      }
+
+      .format-item {
+        display: grid;
+        grid-template-columns: 72px 1fr 80px;
+        gap: 28px;
+        align-items: start;
+        padding: 36px 0;
+        border-bottom: 1px solid var(--line);
+        transition: background 0.2s;
+      }
+      .format-item:first-child {
+        border-top: 1px solid var(--line);
+      }
+
+      .format-idx {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        color: var(--ink-3);
+        padding-top: 7px;
+      }
+      .format-body h3 {
+        font-size: clamp(22px, 2.2vw, 28px);
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .format-body p {
+        font-size: 15.5px;
+        color: var(--ink-2);
+        text-wrap: pretty;
+        line-height: 1.65;
+      }
+      .format-dur {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: var(--ink-3);
+        text-align: right;
+        padding-top: 7px;
+        white-space: nowrap;
+      }
+
+      /* Dark panel for third format item */
+      .format-item.is-dusk {
+        background: var(--ink);
+        color: var(--paper);
+        margin: 0 -48px;
+        padding: 36px 48px;
+        border-color: rgba(255, 255, 255, 0.07);
+      }
+      .format-item.is-dusk:first-child {
+        border-top-color: rgba(255, 255, 255, 0.07);
+      }
+      .format-item.is-dusk .format-idx {
+        color: var(--accent);
+      }
+      .format-item.is-dusk .format-body p {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .format-item.is-dusk .format-dur {
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      .format-note {
+        margin-top: 30px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+
+      /* ── Sessions scroller ──────────────────────── */
+      .sessions-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .sessions-scroller {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding: 4px 4px 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) transparent;
+      }
+      .sessions-scroller::-webkit-scrollbar {
+        height: 5px;
+      }
+      .sessions-scroller::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 999px;
+      }
+
+      .session-card {
+        flex: 0 0 380px;
+        scroll-snap-align: center;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 36px 36px 32px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ses-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 5px 12px;
+        border-radius: 999px;
+        align-self: flex-start;
+        margin-bottom: 24px;
+      }
+
+      .ses-date-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 5px;
+      }
+      .ses-day {
+        font-family: var(--font-display);
+        font-size: 36px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+      .ses-time {
+        font-size: 15.5px;
+        color: var(--ink-2);
+        font-weight: 500;
+        margin-bottom: 24px;
+      }
+      .ses-topic {
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--ink-3);
+        margin-bottom: 24px;
+      }
+
+      .ses-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+      .ses-row {
+        display: flex;
+        gap: 12px;
         align-items: flex-start;
       }
-    }
-  </style>
-</head>
+      .ses-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--paper-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--ink-3);
+      }
+      .ses-row-label {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 2px;
+      }
+      .ses-row-val {
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .ses-row-val a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
 
-<body>
-  <!-- ============================================================
-  COMPONENT: Nav
-  Sticky top bar. Brand wordmark (left) + nav links + CTA (right).
-  Mobile: stacks vertically at 720px.
-  CTA button: .btn.btn-primary → links to #next (RSVP section).
-============================================================ -->
-  <!-- ── Nav ─────────────────────────────── -->
-  <nav class="nav">
-    <a class="brand" href="/">
-      <span class="mark"><span>S</span></span>Smoke&nbsp;&amp;&nbsp;Code
-    </a>
-    <div class="navlinks">
-      <a href="#about">About</a>
-      <a href="#format">Format</a>
-      <a href="#next">Next session</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn btn-primary" href="https://luma.com/5eyc7xuv" target="_blank" rel="noopener">RSVP — it's free</a>
+      /* Past session */
+      .session-card.is-done {
+        background: var(--paper);
+        border-color: var(--line);
+        opacity: 0.72;
+      }
+      .is-done .ses-status {
+        background: rgba(20, 17, 14, 0.06);
+        color: var(--ink-3);
+      }
+
+      /* Up-next session */
+      .session-card.is-next {
+        background: var(--ink);
+        border-color: transparent;
+        color: var(--paper);
+      }
+      /* Subtle accent glow */
+      .is-next::before {
+        content: "";
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 106, 61, 0.22),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .is-next .ses-status {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.65);
+      }
+      .is-next .ses-date-label {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .is-next .ses-day {
+        color: var(--paper);
+      }
+      .is-next .ses-time {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .is-next .ses-topic {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .is-next .ses-row-label {
+        color: rgba(255, 255, 255, 0.35);
+      }
+      .is-next .ses-row-val {
+        color: var(--paper);
+      }
+      .is-next .ses-row-val a {
+        color: var(--accent);
+      }
+      .is-next .ses-icon {
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .ses-seats {
+        margin-top: 12px;
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.35);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* ── FAQ ────────────────────────────────────── */
+      .faq-layout {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 80px;
+        align-items: start;
+      }
+      .aud-intro {
+        font-size: 17px;
+        color: var(--ink-2);
+        margin-bottom: 28px;
+        text-wrap: pretty;
+        line-height: 1.6;
+      }
+      .aud-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--ink-2);
+        background: transparent;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 16px;
+        transition:
+          border-color 0.15s,
+          color 0.15s;
+      }
+      .chip:hover {
+        border-color: var(--ink-2);
+        color: var(--ink);
+      }
+
+      .faq-item {
+        border-bottom: 1px solid var(--line);
+        padding: 20px 0;
+      }
+      .faq-item:first-child {
+        border-top: 1px solid var(--line);
+      }
+      .faq-q {
+        font-family: var(--font-display);
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .qm {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .faq-a {
+        font-size: 15.5px;
+        color: var(--ink-2);
+        padding-left: 28px;
+        text-wrap: pretty;
+        line-height: 1.6;
+      }
+
+      /* ── Footer ─────────────────────────────────── */
+      footer {
+        background: var(--ink);
+        color: rgba(255, 255, 255, 0.5);
+        padding: 72px 0 0;
+        overflow: hidden;
+      }
+      footer .brand {
+        color: #fff;
+      }
+      footer .mark {
+        background: var(--accent);
+      }
+
+      .foot-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 48px;
+        padding-bottom: 48px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .foot-brand-tag {
+        font-size: 14px;
+        max-width: 280px;
+        margin-top: 14px;
+        color: rgba(255, 255, 255, 0.35);
+        text-wrap: pretty;
+        line-height: 1.6;
+      }
+      .foot-cols {
+        display: flex;
+        gap: 64px;
+      }
+      .foot-col h5 {
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+        margin-bottom: 18px;
+      }
+      .foot-col a {
+        display: block;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 14.5px;
+        margin-bottom: 12px;
+        transition: color 0.15s;
+      }
+      .foot-col a:hover {
+        color: #fff;
+      }
+
+      .foot-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 0;
+        font-family: var(--font-mono);
+        font-size: 10.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.22);
+      }
+      .foot-coord {
+        color: var(--river);
+      }
+
+      /* Oversized wordmark — CSSDA editorial closer */
+      .foot-wordmark {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 15.5vw;
+        line-height: 0.82;
+        letter-spacing: -0.04em;
+        color: rgba(255, 255, 255, 0.05);
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 8px -48px 0;
+        padding-bottom: 0;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      /* ── Responsive ─────────────────────────────── */
+      @media (max-width: 1024px) {
+        .wrap,
+        .nav {
+          padding-left: 32px;
+          padding-right: 32px;
+        }
+        .about-layout {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .values {
+          margin-top: 0;
+        }
+        .faq-layout {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .format-item {
+          grid-template-columns: 60px 1fr;
+        }
+        .format-dur {
+          display: none;
+        }
+        .format-item.is-dusk {
+          margin: 0 -32px;
+          padding: 36px 32px;
+        }
+        .foot-top {
+          flex-direction: column;
+        }
+        .foot-cols {
+          gap: 40px;
+        }
+        .foot-wordmark {
+          margin: 8px -32px 0;
+        }
+        .sec-index {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .wrap {
+          padding-left: 24px;
+          padding-right: 24px;
+        }
+        .nav {
+          padding: 0 24px;
+        }
+        /* Keep brand + RSVP, hide other nav links */
+        .navlinks a:not(.btn) {
+          display: none;
+        }
+        .navlinks {
+          gap: 16px;
+        }
+        .hero {
+          padding: 80px 0 56px;
+          min-height: 100svh;
+        }
+        .cta-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .hero-meta {
+          gap: 0;
+        }
+        .hero-meta-item {
+          padding-right: 18px;
+          margin-right: 18px;
+          margin-bottom: 12px;
+        }
+        .format-item.is-dusk {
+          margin: 0 -24px;
+          padding: 36px 24px;
+        }
+        .session-card {
+          flex-basis: 85vw;
+          padding: 28px 26px 26px;
+        }
+        .ses-day {
+          font-size: 28px;
+        }
+        .foot-top,
+        .foot-cols {
+          flex-direction: column;
+          gap: 28px;
+        }
+        .foot-wordmark {
+          margin: 8px -24px 0;
+          font-size: 17vw;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Sticky section index (CSSDA editorial detail) -->
+    <div class="sec-index" id="secIndex" aria-hidden="true">
+      <span class="si-line"></span>
+      <span id="siText">01</span>
     </div>
-  </nav>
 
-  <!-- ============================================================
-  COMPONENT: Hero
-  Two-column grid (1.15fr / 0.85fr). Left: headline + CTA.
-  Right: decorative art panel with floating code card.
-  Headline: "The Valley Builds with AI" (h1, 74px Sora)
-  Spanish subhead: italic coral, 27px Sora
-  Art panel: warm gradient bg + dot pattern + two blobs (CSS)
-  Code card: monospace snippet, purely decorative
-  Meta row: three icon+label trust signals below CTA buttons
-============================================================ -->
-  <!-- ── Hero ────────────────────────────── -->
-  <header class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">
-          <span class="dot"></span>Free · In-person · Pharr, TX
-        </span>
-        <h1>The Valley Builds<br />with AI</h1>
-        <div class="sub-es">Cigars, code, and community</div>
-        <p class="lede">
+    <!-- ── Nav ─────────────────────────────── -->
+    <nav class="nav" id="siteNav">
+      <a class="brand" href="/">
+        <span class="mark"><span>S</span></span
+        >Smoke&nbsp;&amp;&nbsp;Code
+      </a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#format">Format</a>
+        <a href="#next">Sessions</a>
+        <a href="#faq">FAQ</a>
+        <a
+          class="btn btn-primary"
+          href="https://luma.com/5eyc7xuv"
+          target="_blank"
+          rel="noopener"
+          >RSVP — it's free</a
+        >
+      </div>
+    </nav>
+
+    <!-- ── Hero ──────────────────────────────── -->
+    <header class="hero" id="hero">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <!-- Topographic contour lines (valley terrain motif) -->
+      <svg
+        class="contour-svg"
+        viewBox="0 0 1400 900"
+        preserveAspectRatio="xMidYMid slice"
+        aria-hidden="true"
+      >
+        <path
+          d="M-200,80 C100,55 280,115 520,78 S820,95 1060,60 S1250,80 1600,50"
+        />
+        <path
+          d="M-200,195 C80,170 260,228 500,192 S800,210 1040,172 S1240,195 1600,162"
+        />
+        <path
+          d="M-200,318 C110,292 300,355 540,314 S840,335 1080,292 S1270,318 1600,280"
+        />
+        <path
+          d="M-200,445 C90,418 285,480 525,437 S825,460 1065,415 S1255,442 1600,402"
+        />
+        <path
+          d="M-200,572 C105,544 295,608 535,562 S835,585 1075,540 S1265,568 1600,528"
+        />
+        <path
+          d="M-200,698 C115,668 310,736 550,686 S850,712 1090,662 S1280,692 1600,648"
+        />
+        <path
+          d="M-200,824 C95,796 290,860 530,810 S830,838 1070,786 S1260,818 1600,772"
+        />
+      </svg>
+      <div class="hero-wash" aria-hidden="true"></div>
+
+      <div class="wrap hero-inner">
+        <div class="eyebrow reveal">
+          <span class="dot"></span>
+          FREE · IN-PERSON · 26.19°N&nbsp;98.18°W · PHARR, TX
+        </div>
+        <h1 class="reveal" style="transition-delay: 0.07s">
+          The Valley<br />Builds<br />with AI
+        </h1>
+        <div class="hero-sub reveal" style="transition-delay: 0.13s">
+          Cigars, code, and community
+        </div>
+        <p class="lede reveal" style="transition-delay: 0.22s">
           A free, in-person meetup in the Rio Grande Valley where students,
-          builders, and the curious learn to ship real software with AI. Bring
-          a laptop, bring an idea — we'll build together.
+          builders, and the curious learn to ship real software with AI. Bring a
+          laptop, bring an idea — we'll build together.
         </p>
-        <div class="cta-row">
-          <a class="btn btn-primary btn-lg" href="https://luma.com/5eyc7xuv" target="_blank" rel="noopener">Reserve your
-            spot</a>
+        <div class="cta-row reveal" style="transition-delay: 0.28s">
+          <a
+            class="btn btn-primary btn-lg"
+            href="https://luma.com/5eyc7xuv"
+            target="_blank"
+            rel="noopener"
+            >Reserve your spot</a
+          >
           <a class="btn btn-ghost btn-lg" href="#format">See the format</a>
         </div>
-        <div class="meta-row">
-          <span class="meta">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-            All skill levels welcome
-          </span>
-          <span class="meta">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <path
-                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-            Bilingual · EN / ES
-          </span>
-          <span class="meta">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" />
-            </svg>
-            Always free
-          </span>
-        </div>
-      </div>
-      <div class="hero-art">
-        <div class="dots-bg"></div>
-        <div class="blob b1"></div>
-        <div class="blob b2"></div>
-        <div class="codecard">
-          <div class="clabel">build-with-ai.session</div>
-          <div class="crow">
-            <span class="cm">// describe what you want</span>
+        <div class="hero-meta reveal" style="transition-delay: 0.34s">
+          <div class="hero-meta-item">Level<span>All skill levels</span></div>
+          <div class="hero-meta-item">
+            Language<span>EN / ES · Bilingual</span>
           </div>
-          <div class="crow"><b>build</b> "a sign-up form that emails me"</div>
-          <div class="crow"><span class="cm">// then ship it</span></div>
-          <div class="crow"><b>deploy</b> → <b>live</b> ✦</div>
+          <div class="hero-meta-item">Cost<span>Always free</span></div>
+          <div class="hero-meta-item">
+            Venue<span>Cigar Society, Pharr TX</span>
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- ============================================================
-  COMPONENT: About
-  Sand background band. Two columns: copy (left) + value cards (right).
-  Value cards: icon + heading + 1-line description. White on sand bg.
-  Section tag: "What is Smoke & Code?"
-============================================================ -->
-  <!-- ── About ────────────────────────────── -->
-  <section class="band sand-band" id="about">
-    <div class="wrap about-grid">
-      <div class="about-copy">
-        <div class="sec-tag">What is Smoke &amp; Code?</div>
-        <h2 class="sec-title">
-          A room full of people<br />building the future
-        </h2>
-        <p>
-          Smoke &amp; Code is a community meetup for anyone in the RGV who
-          wants to build with AI — no computer-science degree required. We
-          meet in person at
-          <a href="https://cigarsocietyus.com/" target="_blank" rel="noopener" style="
-                color: var(--coral);
-                text-decoration: underline;
-                text-underline-offset: 2px;
-              ">Cigar Society</a>, open our laptops, and make something real together. Grab a cigar
-          from the lounge, light up, and code.
-        </p>
-        <p>
-          No curriculum, no commitment. We're enthusiasts who wanted a place
-          to build in person — cigars, code, and good company. Come for the
-          full afternoon or drop in for a bit. The lounge is open either way.
-        </p>
-        <p>
-          This first few meetup are an experiment — we're testing the water to see
-          if we can build a real community in the Valley. No pressure, no
-          promises. Just show up, build something, and let's find out
-          together.
-        </p>
-      </div>
-      <div class="values">
-        <div class="value">
-          <span class="v-ico">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h8l-1 8 10-12h-8z" />
-            </svg>
-          </span>
+    <!-- ── About ─────────────────────────────── -->
+    <section class="band band-tinted" id="about" data-section="01 — About">
+      <div class="wrap">
+        <div class="about-layout">
           <div>
-            <h4>Hands-on, not a lecture</h4>
-            <p>
-              You code along the whole time. We learn by shipping, not by
-              watching slides.
+            <div class="sec-label reveal">What is Smoke &amp; Code?</div>
+            <p class="about-statement reveal">
+              A room full of people <em>building the future</em> of the Rio
+              Grande Valley.
             </p>
-          </div>
-        </div>
-        <div class="value">
-          <span class="v-ico">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <path
-                d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-          </span>
-          <div>
-            <h4>Built for the Valley</h4>
-            <p>
-              Run by locals, for locals. Help is always in the room — just
-              ask.
-            </p>
-          </div>
-        </div>
-        <div class="value">
-          <span class="v-ico">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-              <path
-                d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-            </svg>
-          </span>
-          <div>
-            <h4>Leave with something real</h4>
-            <p>
-              Walk out with a working project and the confidence to keep going
-              on your own.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-   COMPONENT: Format (Session Cards)
-   Three-column card grid. Cards: Lesson 01, Lesson 02, Part 03.
-   Lesson 01 & 02: white bg, coral gradient icon.
-   Part 03 (.card.hack): dark ink bg, amber accent — visually distinct.
-   Each card: label + duration (top) / icon / title / description.
-============================================================ -->
-  <!-- ── Format ────────────────────────────── -->
-  <section class="band" id="format">
-    <div class="wrap">
-      <div class="sec-tag">The format</div>
-      <h2 class="sec-title">Three parts, one afternoon</h2>
-      <p class="sec-intro">
-        Someone kicks things off with an idea. Then you code, you smoke, you
-        build. At the end, the mic opens — show what you made, or just watch
-        and steal ideas. No pressure either way.
-      </p>
-      <div class="cards">
-        <div class="card">
-          <div class="num">
-            <span>Lesson 01</span><span class="dur">~30 min</span>
-          </div>
-          <div class="step-ico" style="background: linear-gradient(150deg, #f59e3c, #f15a35)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h8l-1 8 10-12h-8z" />
-            </svg>
-          </div>
-          <h3>The Spark</h3>
-          <p>
-            Someone shares an idea, a technique, or a live demo. Tight
-            30-minute talk — no slides required, just real code and real
-            thinking to get the room going.
-          </p>
-        </div>
-        <div class="card">
-          <div class="num">
-            <span>Lesson 02</span><span class="dur">~2 hr</span>
-          </div>
-          <div class="step-ico" style="background: linear-gradient(150deg, #f15a35, #d8431f)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" />
-              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
-          </div>
-          <h3>Build &amp; Burn</h3>
-          <p>
-            Two hours of hands-on coding with a cigar in hand. Work solo or
-            pair up. Chase the idea you just heard, scratch your own itch, or
-            get unstuck with help from the room.
-          </p>
-        </div>
-        <div class="card hack">
-          <div class="num">
-            <span>Part 03</span><span class="dur">~30 min</span>
-          </div>
-          <div class="step-ico" style="background: linear-gradient(150deg, #f59e3c, #f15a35)">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-              <path
-                d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-            </svg>
-          </div>
-          <h3>Show &amp; Ship</h3>
-          <p>
-            The mic is open. Demo what you built — no judgment, no pressure.
-            Ship it if you're ready, or kick back and see what everyone else
-            made. Totally optional.
-          </p>
-        </div>
-      </div>
-      <p class="sec-intro" style="
-            margin-top: 28px;
-            font-size: 15px;
-            color: var(--ink-3);
-            max-width: 620px;
-          ">
-        Arrive when you like, stay as long as you like. We're enthusiasts who
-        wanted a place to build together.
-      </p>
-    </div>
-  </section>
-
-  <!-- ============================================================
-  COMPONENT: Sessions
-  Sand band. Horizontal scroller (.sessions-scroller) of session cards.
-  Past sessions use .is-done (sand bg, muted, "Completed" badge).
-  The upcoming one uses .is-next (coral gradient, dotted overlay, RSVP CTA).
-  Add a new <article class="session-card"> per session; oldest first.
-  TODO: Replace dates, topics, RSVP href, and venue with live data.
-============================================================ -->
-  <!-- ── Sessions ──────────────────────────── -->
-  <section class="band sand-band" id="next">
-    <div class="wrap">
-      <div class="sec-tag" style="text-align: center">Sessions</div>
-      <h2 class="sec-title" style="text-align: center; margin-bottom: 42px">
-        Save your seat
-      </h2>
-      <div class="sessions-scroller">
-        <!-- ── Past session (completed) ── -->
-        <article class="session-card is-done">
-          <div class="ses-status">✓ Completed</div>
-          <div class="next-date">Wednesday</div>
-          <div class="next-day">June 24, 2026</div>
-          <div class="next-time">4:00 – 7:00 PM</div>
-          <div class="ses-topic">Topic: Refactor</div>
-          <div class="next-list">
-            <div class="nl">
-              <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg></span>
-              <div>
-                <div class="nt">Where</div>
-                <div class="nv">Cigar Society · Pharr, TX</div>
-              </div>
+            <div class="about-body reveal">
+              <p>
+                Smoke &amp; Code is a community meetup for anyone in the RGV who
+                wants to build with AI — no computer-science degree required. We
+                meet in person at
+                <a
+                  href="https://cigarsocietyus.com/"
+                  target="_blank"
+                  rel="noopener"
+                  >Cigar Society</a
+                >, open our laptops, and make something real together. Grab a
+                cigar from the lounge, light up, and code.
+              </p>
+              <p>
+                No curriculum, no commitment. We're enthusiasts who wanted a
+                place to build in person. Come for the full afternoon or drop in
+                for a bit.
+              </p>
+              <p>
+                These first meetups are an experiment — testing the water to see
+                if we can build a real community in the Valley. No pressure, no
+                promises. Just show up and build.
+              </p>
             </div>
           </div>
-        </article>
-
-        <!-- ── Next session (up next) ── -->
-        <article class="session-card is-next">
-          <div class="ndots"></div>
-          <div class="ses-status">Up next</div>
-          <div class="next-date">Wednesday</div>
-          <div class="next-day">July 1, 2026</div>
-          <div class="next-time">4:00 – 7:00 PM</div>
-          <div class="next-list">
-            <div class="nl">
-              <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg></span>
-              <div>
-                <div class="nt">Where</div>
-                <div class="nv">
-                  <a href="https://cigarsocietyus.com/" target="_blank" rel="noopener" style="
-                        color: inherit;
-                        text-decoration: underline;
-                        text-underline-offset: 2px;
-                      ">Cigar Society</a>
-                  · 116 W State Ave, Pharr, TX
+          <div>
+            <div class="values">
+              <div class="value reveal">
+                <span class="v-idx">01</span>
+                <div>
+                  <h4>Hands-on, not a lecture</h4>
+                  <p>
+                    You code along the whole time. We learn by shipping, not by
+                    watching slides.
+                  </p>
                 </div>
               </div>
-            </div>
-            <div class="nl">
-              <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                  <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
-                </svg></span>
-              <div>
-                <div class="nt">Bring</div>
-                <div class="nv">A laptop, a charger, and curiosity</div>
+              <div class="value reveal" style="transition-delay: 0.08s">
+                <span class="v-idx">02</span>
+                <div>
+                  <h4>Built for the Valley</h4>
+                  <p>
+                    Run by locals, for locals. Help is always in the room — just
+                    ask.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="nl">
-              <span class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path
-                    d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" />
-                </svg></span>
-              <div>
-                <div class="nt">Cost</div>
-                <div class="nv">
-                  Free to attend — cigars available for purchase at the lounge
+              <div class="value reveal" style="transition-delay: 0.16s">
+                <span class="v-idx">03</span>
+                <div>
+                  <h4>Leave with something real</h4>
+                  <p>
+                    Walk out with a working project and the confidence to keep
+                    going on your own.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <a class="btn btn-oncoral btn-lg" href="https://luma.com/5eyc7xuv" target="_blank" rel="noopener">Reserve your
-            spot →</a>
-          <div class="seats">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 6L9 17l-5-5" />
-            </svg>
-            <span>Seats are first-come, first-served</span>
-          </div>
-        </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============================================================
-  COMPONENT: FAQ + Audience
-  Two columns: audience callout (left) + FAQ list (right).
-  Audience chips: pill tags listing who the meetup is for.
-  FAQ items: Q prefix in coral, answer indented. Separated by border-bottom.
-  Expandable accordion behavior can be added — currently static.
-============================================================ -->
-  <!-- ── FAQ / Audience ────────────────────── -->
-  <section class="band" id="faq">
-    <div class="wrap faq-grid">
-      <div>
-        <div class="sec-tag">Who's it for</div>
-        <h2 class="sec-title" style="font-size: 36px">Everyone, honestly</h2>
-        <p class="sec-intro" style="font-size: 17px">
-          If you're curious about building with AI, you belong here. No
-          experience needed — just show up.
+    <!-- ── Format ────────────────────────────── -->
+    <section class="band" id="format" data-section="02 — Format">
+      <div class="wrap">
+        <div class="sec-label reveal">The format</div>
+        <h2 class="sec-title reveal">Three parts, one afternoon</h2>
+        <p class="sec-intro reveal">
+          Someone kicks things off with an idea. Then you code, you smoke, you
+          build. At the end, the mic opens — show what you made, or just watch
+          and steal ideas. No pressure either way.
         </p>
-        <div class="aud-chips">
-          <span class="chip">Students</span>
-          <span class="chip">Career-changers</span>
-          <span class="chip">Founders</span>
-          <span class="chip">Designers</span>
-          <span class="chip">Total beginners</span>
-          <span class="chip">Tinkerers</span>
+        <div class="format-list">
+          <div class="format-item reveal">
+            <div class="format-idx">[01]</div>
+            <div class="format-body">
+              <h3>The Spark</h3>
+              <p>
+                Someone shares an idea, a technique, or a live demo. Tight
+                30-minute talk — no slides required, just real code and real
+                thinking to get the room going.
+              </p>
+            </div>
+            <div class="format-dur">~30 min</div>
+          </div>
+          <div class="format-item reveal">
+            <div class="format-idx">[02]</div>
+            <div class="format-body">
+              <h3>Build &amp; Burn</h3>
+              <p>
+                Two hours of hands-on coding with a cigar in hand. Work solo or
+                pair up. Chase the idea you just heard, scratch your own itch,
+                or get unstuck with help from the room.
+              </p>
+            </div>
+            <div class="format-dur">~2 hr</div>
+          </div>
+          <div class="format-item is-dusk reveal">
+            <div class="format-idx">[03]</div>
+            <div class="format-body">
+              <h3>Show &amp; Ship</h3>
+              <p>
+                The mic is open. Demo what you built — no judgment, no pressure.
+                Ship it if you're ready, or kick back and see what everyone else
+                made. Totally optional.
+              </p>
+            </div>
+            <div class="format-dur">~30 min</div>
+          </div>
         </div>
+        <p class="format-note reveal">
+          Arrive when you like · Stay as long as you like
+        </p>
       </div>
-      <div>
-        <div class="faq-item">
-          <div class="faq-q">
-            <span class="qm">Q.</span>Is it really free?
-          </div>
-          <div class="faq-a">Yes — completely. No fees, no catch.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">
-            <span class="qm">Q.</span>Do I need to know how to code?
-          </div>
-          <div class="faq-a">
-            Nope. Many people come with zero experience. That's exactly who
-            these sessions are built for.
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">
-            <span class="qm">Q.</span>Do you offer help in Spanish?
-          </div>
-          <div class="faq-a">
-            Yes, just ask. We always have bilingual folks in the room happy to
-            help in either language.
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">
-            <span class="qm">Q.</span>What should I bring?
-          </div>
-          <div class="faq-a">
-            A laptop and a charger. We'll help you set up everything else when
-            you arrive.
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">
-            <span class="qm">Q.</span>Can I bring a friend?
-          </div>
-          <div class="faq-a">
-            Please do. Just have them RSVP too so we can save enough seats and
-            snacks.
-          </div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">
-            <span class="qm">Q.</span>Can I come late or leave early?
-          </div>
-          <div class="faq-a">
-            Of course. We're here for the afternoon — join when it suits you.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============================================================
-  COMPONENT: Footer
-  Dark ink background. Two rows:
-  Top: brand + tagline (left) / two link columns (right).
-  Bottom: copyright (left) / tagline (right).
-  Colors invert from body — brand mark uses --coral, links use #a59b90.
-============================================================ -->
-  <!-- ── Footer ────────────────────────────── -->
-  <footer>
-    <div class="wrap">
-      <div class="foot-top">
+    <!-- ── Sessions ──────────────────────────── -->
+    <section class="band band-tinted" id="next" data-section="03 — Sessions">
+      <div class="wrap">
+        <div class="sessions-header">
+          <div class="sec-label reveal">Sessions</div>
+          <h2 class="sec-title reveal">Save your seat</h2>
+        </div>
+        <div class="sessions-scroller reveal">
+          <!-- Past session -->
+          <article class="session-card is-done">
+            <div class="ses-status">✓ Completed</div>
+            <div class="ses-date-label">Wednesday</div>
+            <div class="ses-day">June 24</div>
+            <div class="ses-time">4:00 – 7:00 PM · 2026</div>
+            <div class="ses-topic">Topic: Refactor</div>
+            <div class="ses-meta">
+              <div class="ses-row">
+                <span class="ses-icon">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div>
+                  <div class="ses-row-label">Where</div>
+                  <div class="ses-row-val">Cigar Society · Pharr, TX</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Up-next session -->
+          <article class="session-card is-next">
+            <div class="ses-status">↑ Up next</div>
+            <div class="ses-date-label">Wednesday</div>
+            <div class="ses-day">July 1</div>
+            <div class="ses-time">4:00 – 7:00 PM · 2026</div>
+            <div class="ses-meta">
+              <div class="ses-row">
+                <span class="ses-icon">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div>
+                  <div class="ses-row-label">Where</div>
+                  <div class="ses-row-val">
+                    <a
+                      href="https://cigarsocietyus.com/"
+                      target="_blank"
+                      rel="noopener"
+                      >Cigar Society</a
+                    >
+                    · 116 W State Ave, Pharr, TX
+                  </div>
+                </div>
+              </div>
+              <div class="ses-row">
+                <span class="ses-icon">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                    />
+                    <path d="M3 6h18M16 10a4 4 0 0 1-8 0" />
+                  </svg>
+                </span>
+                <div>
+                  <div class="ses-row-label">Bring</div>
+                  <div class="ses-row-val">
+                    A laptop, a charger, and curiosity
+                  </div>
+                </div>
+              </div>
+              <div class="ses-row">
+                <span class="ses-icon">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"
+                    />
+                  </svg>
+                </span>
+                <div>
+                  <div class="ses-row-label">Cost</div>
+                  <div class="ses-row-val">
+                    Free to attend — cigars available at the lounge
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a
+              class="btn btn-primary btn-lg"
+              href="https://luma.com/5eyc7xuv"
+              target="_blank"
+              rel="noopener"
+              >Reserve your spot →</a
+            >
+            <div class="ses-seats">
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+              First-come, first-served
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ / Audience ────────────────────── -->
+    <section class="band" id="faq" data-section="04 — FAQ">
+      <div class="wrap faq-layout">
         <div>
-          <a class="brand" href="/">
-            <span class="mark"><span>S</span></span>Smoke&nbsp;&amp;&nbsp;Code
-          </a>
-          <p class="foot-tag">
-            A free, in-person AI coding meetup in the Rio Grande Valley. Come
-            build something with us.
+          <div class="sec-label reveal">Who's it for</div>
+          <h2
+            class="sec-title reveal"
+            style="font-size: clamp(26px, 3vw, 38px)"
+          >
+            Everyone,<br />honestly
+          </h2>
+          <p class="aud-intro reveal">
+            If you're curious about building with AI, you belong here. No
+            experience needed — just show up.
           </p>
-        </div>
-        <div class="foot-cols">
-          <div class="foot-col">
-            <h5>Meetup</h5>
-            <a href="#about">About</a>
-            <a href="#format">Format</a>
-            <a href="#next">Next session</a>
-            <a href="#faq">FAQ</a>
+          <div class="aud-chips reveal">
+            <span class="chip">Students</span>
+            <span class="chip">Career-changers</span>
+            <span class="chip">Founders</span>
+            <span class="chip">Designers</span>
+            <span class="chip">Total beginners</span>
+            <span class="chip">Tinkerers</span>
           </div>
-          <div class="foot-col">
-            <h5>Connect</h5>
-            <a href="#">Instagram</a>
-            <a href="#">WhatsApp group</a>
-            <a href="#">Email us</a>
-            <a href="#">Become a sponsor</a>
+        </div>
+        <div>
+          <div class="faq-item reveal">
+            <div class="faq-q"><span class="qm">Q</span>Is it really free?</div>
+            <div class="faq-a">Yes — completely. No fees, no catch.</div>
+          </div>
+          <div class="faq-item reveal">
+            <div class="faq-q">
+              <span class="qm">Q</span>Do I need to know how to code?
+            </div>
+            <div class="faq-a">
+              Nope. Many people come with zero experience. That's exactly who
+              these sessions are built for.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <div class="faq-q">
+              <span class="qm">Q</span>Do you offer help in Spanish?
+            </div>
+            <div class="faq-a">
+              Yes, just ask. We always have bilingual folks in the room happy to
+              help in either language.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <div class="faq-q">
+              <span class="qm">Q</span>What should I bring?
+            </div>
+            <div class="faq-a">
+              A laptop and a charger. We'll help you set up everything else when
+              you arrive.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <div class="faq-q">
+              <span class="qm">Q</span>Can I bring a friend?
+            </div>
+            <div class="faq-a">
+              Please do. Just have them RSVP too so we can save enough seats.
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <div class="faq-q">
+              <span class="qm">Q</span>Can I come late or leave early?
+            </div>
+            <div class="faq-a">
+              Of course. We're here for the afternoon — join when it suits you.
+            </div>
           </div>
         </div>
       </div>
-      <div class="foot-bottom">
-        <span>© 2026 Smoke &amp; Code · Pharr, TX</span>
-        <span class="es-tag">Made in the RGV 🌴</span>
-      </div>
-    </div>
-  </footer>
-</body>
+    </section>
 
+    <!-- ── Footer ────────────────────────────── -->
+    <footer>
+      <div class="wrap">
+        <div class="foot-top">
+          <div>
+            <a class="brand" href="/">
+              <span class="mark"><span>S</span></span
+              >Smoke&nbsp;&amp;&nbsp;Code
+            </a>
+            <p class="foot-brand-tag">
+              A free, in-person AI coding meetup in the Rio Grande Valley. Come
+              build something with us.
+            </p>
+          </div>
+          <div class="foot-cols">
+            <div class="foot-col">
+              <h5>Meetup</h5>
+              <a href="#about">About</a>
+              <a href="#format">Format</a>
+              <a href="#next">Sessions</a>
+              <a href="#faq">FAQ</a>
+            </div>
+            <div class="foot-col">
+              <h5>Connect</h5>
+              <a href="#">Instagram</a>
+              <a href="#">WhatsApp group</a>
+              <a href="#">Email us</a>
+              <a href="#">Become a sponsor</a>
+            </div>
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 Smoke &amp; Code · Pharr, TX</span>
+          <span class="foot-coord">26.19°N 98.18°W · Made in the RGV</span>
+        </div>
+      </div>
+      <!-- Oversized wordmark (CSSDA editorial closer) -->
+      <div class="foot-wordmark" aria-hidden="true">
+        SMOKE&nbsp;&amp;&nbsp;CODE
+      </div>
+    </footer>
+
+    <script>
+      // Nav scroll border
+      const nav = document.getElementById("siteNav");
+      window.addEventListener(
+        "scroll",
+        () => {
+          nav.classList.toggle("scrolled", window.scrollY > 10);
+        },
+        { passive: true },
+      );
+
+      // Scroll-reveal
+      const revealEls = document.querySelectorAll(".reveal");
+      const revealObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              revealObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -32px 0px" },
+      );
+      revealEls.forEach((el) => revealObs.observe(el));
+
+      // Hero reveals fire immediately (already in view)
+      document.querySelectorAll(".hero .reveal").forEach((el) => {
+        requestAnimationFrame(() => el.classList.add("is-visible"));
+      });
+
+      // Sticky section index
+      const secIndex = document.getElementById("secIndex");
+      const siText = document.getElementById("siText");
+      const sections = document.querySelectorAll("[data-section]");
+
+      const secObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              siText.textContent = e.target.dataset.section;
+              secIndex.classList.add("is-active");
+            }
+          });
+        },
+        { threshold: 0.25 },
+      );
+      sections.forEach((s) => secObs.observe(s));
+
+      // Hide index when hero is visible
+      const heroObs = new IntersectionObserver(
+        ([e]) => {
+          if (e.isIntersecting) secIndex.classList.remove("is-active");
+        },
+        { threshold: 0.3 },
+      );
+      heroObs.observe(document.getElementById("hero"));
+    </script>
+  </body>
 </html>

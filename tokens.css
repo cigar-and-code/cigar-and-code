@@ -1,101 +1,91 @@
 /* ============================================================
-   tokens.css — Smoke & Code Design Tokens
+   tokens.css — Smoke & Code Design Tokens v2
    ============================================================
-   Import this file first in any component/page stylesheet.
+   Import before any stylesheet.
    All values are CSS custom properties on :root.
-
-   Usage:
-     color: var(--coral);
-     background: var(--sand);
-     font-family: var(--font-display);
    ============================================================ */
 
 :root {
 
   /* ── Color: Ink (text) ─────────────────────────────────────
      --ink       Primary text. Headings, body, nav.
-     --ink-2     Secondary text. Subheadings, descriptions, labels.
-     --ink-3     Muted text. Timestamps, meta, placeholders.
+     --ink-2     Secondary text. Descriptions, labels, meta.
+     --ink-3     Muted text. Eyebrows, timestamps, placeholders.
   */
-  --ink:         #1b1714;
-  --ink-2:       #5c534b;
-  --ink-3:       #8f857b;
+  --ink:    #14110e;
+  --ink-2:  #4f4842;
+  --ink-3:  #8a8178;
 
   /* ── Color: Surfaces ───────────────────────────────────────
-     --paper     Default page background. Light warm white.
-     --sand      Alternate section background. Warm light tan.
-     --sand-2    Deeper sand for nested elements (hover states).
-     --line      Border / divider color.
+     --paper    Default page background. Warm bone.
+     --paper-2  Raised / tinted band. Slightly deeper.
+     --line     Border / divider color.
   */
-  --paper:       #fcfbf8;
-  --sand:        #f4ede3;
-  --sand-2:      #efe6d9;
-  --line:        #e6dccd;
+  --paper:   #f7f4ee;
+  --paper-2: #efe9df;
+  --line:    #e2dacd;
 
   /* ── Color: Brand Accents ──────────────────────────────────
-     --coral       Primary CTA, links, highlights. Use on light bg.
-     --coral-deep  Darker coral for hover states, text on light bg.
-     --amber       Secondary accent. Use for contrast on dark bg
-                   (e.g. footer links, hackathon card label).
+     --accent       Primary CTA, highlights, links.
+     --accent-deep  Hover states, text on light bg.
+     --river        Secondary accent — use sparingly.
+                    One or two touches only (footer coord, etc).
   */
-  --coral:       #f15a35;
-  --coral-deep:  #d8431f;
-  --amber:       #f59e3c;
+  --accent:      #ff6a3d;
+  --accent-deep: #e24e23;
+  --river:       #0f6e6a;
 
   /* ── Typography ────────────────────────────────────────────
      --font-display   Headings, brand wordmark, large UI labels.
-                      Geometric, tight — import Sora from Google Fonts.
+                      Geometric grotesk — Space Grotesk.
      --font-body      Body copy, nav, buttons, form inputs.
-                      Friendly, readable — import Plus Jakarta Sans.
+                      Neutral readable — Inter.
+     --font-mono      Eyebrows, section indices, coordinate labels,
+                      technical meta strips — JetBrains Mono.
+
+   Google Fonts link (add to <head> before stylesheet):
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   */
-  --font-display: 'Sora', system-ui, sans-serif;
-  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
 
   /* ── Type Scale ────────────────────────────────────────────
-     Hero headline:   74px / font-weight 700 / letter-spacing -0.02em
-     Section title:   42px / font-weight 700
-     Card title:      24px / font-weight 700
-     Body large:      19px / font-weight 400
-     Body base:       16px / font-weight 400
-     Body small:      14–15px / font-weight 500
-     Label/eyebrow:   12.5px / font-weight 700 / letter-spacing 0.14em / uppercase
+     Hero headline:   clamp(48px, 8.5vw, 104px) / weight 700 / tracking -0.04em
+     Section title:   clamp(32px, 4vw, 46px) / weight 700
+     Statement:       clamp(26px, 3vw, 36px) / weight 600
+     Card title:      28px / weight 700
+     Body large:      18–19px / weight 400
+     Body base:       15.5–16px / weight 400
+     Body small:      14–14.5px / weight 400
+     Mono label:      11–12px / weight 400–500 / tracking 0.1–0.14em / uppercase
   */
 
   /* ── Spacing ───────────────────────────────────────────────
-     Section vertical padding:   88px
-     Max content width:          1120px
-     Content horizontal gutter:  48px (desktop) / 32px (tablet)
-     Card gap:                   22px
-     Card padding:               30px 28px
+     Section vertical padding:  96px (band), 72px (band-sm)
+     Max content width:         1120px
+     Content horizontal gutter: 48px (desktop) / 32px (tablet) / 24px (mobile)
+     Card gap:                  20px
+     Card padding:              36px
   */
 
   /* ── Border Radius ─────────────────────────────────────────
-     Buttons (pill):   999px
-     Cards:            20px
-     Large panels:     24px
-     Small icons:      10–14px
-     Brand mark:       9px
+     Buttons (pill):  999px
+     Session cards:   20px
+     Icon badges:     8px
+     Brand mark:      7px
   */
 
   /* ── Shadows ───────────────────────────────────────────────
-     Card hover:   0 16px 40px rgba(120,60,30,.12)
-     Next panel:   0 12px 40px rgba(120,60,30,.08)
-     CTA button:   0 6px 18px rgba(241,90,53,.28)
-     CTA hover:    0 10px 26px rgba(241,90,53,.34)
-     Code card:    0 18px 50px rgba(120,60,30,.16)
+     CTA button:  0 4px 16px rgba(255,106,61,.3)
+     CTA hover:   0 8px 24px rgba(255,106,61,.38)
   */
 
-  /* ── Breakpoints (use in @media queries) ───────────────────
-     Tablet:  max-width 1024px  (single-column layout)
-     Mobile:  max-width  720px  (stacked nav, larger tap targets)
+  /* ── Breakpoints ───────────────────────────────────────────
+     Tablet:  max-width 1024px
+     Mobile:  max-width  720px
   */
 
 }
-
-/* ── Google Fonts import ───────────────────────────────────────
-   Add this <link> to your <head> before any stylesheet:
-
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
-*/

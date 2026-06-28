@@ -271,6 +271,90 @@
 
       .hero-inner {
         position: relative;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 56px;
+        align-items: center;
+      }
+
+      /* ── Hero art panel ─────────────────────────── */
+      .hero-art {
+        position: relative;
+        height: 440px;
+        border-radius: 20px;
+        background: linear-gradient(150deg, var(--paper-2) 0%, #e9dfd2 100%);
+        border: 1px solid var(--line);
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .dots-bg {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(var(--ink) 1.2px, transparent 1.2px);
+        background-size: 20px 20px;
+        opacity: 0.06;
+      }
+
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+      }
+
+      .b1 {
+        width: 210px;
+        height: 210px;
+        right: -52px;
+        top: -52px;
+        background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent-deep));
+        opacity: 0.88;
+      }
+
+      .b2 {
+        width: 130px;
+        height: 130px;
+        left: -32px;
+        bottom: -32px;
+        background: var(--ink);
+        opacity: 0.92;
+      }
+
+      .codecard {
+        position: absolute;
+        left: 32px;
+        top: 108px;
+        right: 32px;
+        background: #fff;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 48px rgba(20, 17, 14, 0.11);
+        padding: 20px 22px;
+      }
+
+      .codecard .clabel {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 14px;
+      }
+
+      .crow {
+        font-family: var(--font-mono);
+        font-size: 13px;
+        line-height: 2;
+        color: var(--ink-2);
+      }
+
+      .crow b {
+        color: var(--accent-deep);
+        font-weight: 500;
+      }
+
+      .crow .cm {
+        color: var(--ink-3);
       }
 
       .eyebrow {
@@ -896,6 +980,12 @@
           padding-left: 32px;
           padding-right: 32px;
         }
+        .hero-inner {
+          grid-template-columns: 1fr;
+        }
+        .hero-art {
+          display: none;
+        }
         .about-layout {
           grid-template-columns: 1fr;
           gap: 32px;
@@ -1050,39 +1140,56 @@
       <div class="hero-wash" aria-hidden="true"></div>
 
       <div class="wrap hero-inner">
-        <div class="eyebrow reveal">
-          <span class="dot"></span>
-          FREE · IN-PERSON · 26.19°N&nbsp;98.18°W · PHARR, TX
-        </div>
-        <h1 class="reveal" style="transition-delay: 0.07s">
-          The Valley<br />Builds<br />with AI
-        </h1>
-        <div class="hero-sub reveal" style="transition-delay: 0.13s">
-          Cigars, code, and community
-        </div>
-        <p class="lede reveal" style="transition-delay: 0.22s">
-          A free, in-person meetup in the Rio Grande Valley where students,
-          builders, and the curious learn to ship real software with AI. Bring a
-          laptop, bring an idea — we'll build together.
-        </p>
-        <div class="cta-row reveal" style="transition-delay: 0.28s">
-          <a
-            class="btn btn-primary btn-lg"
-            href="https://luma.com/5eyc7xuv"
-            target="_blank"
-            rel="noopener"
-            >Reserve your spot</a
-          >
-          <a class="btn btn-ghost btn-lg" href="#format">See the format</a>
-        </div>
-        <div class="hero-meta reveal" style="transition-delay: 0.34s">
-          <div class="hero-meta-item">Level<span>All skill levels</span></div>
-          <div class="hero-meta-item">
-            Language<span>EN / ES · Bilingual</span>
+        <!-- Left: text content -->
+        <div class="hero-text">
+          <div class="eyebrow reveal">
+            <span class="dot"></span>
+            FREE · IN-PERSON · 26.19°N&nbsp;98.18°W · PHARR, TX
           </div>
-          <div class="hero-meta-item">Cost<span>Always free</span></div>
-          <div class="hero-meta-item">
-            Venue<span>Cigar Society, Pharr TX</span>
+          <h1 class="reveal" style="transition-delay: 0.07s">
+            The Valley<br />Builds<br />with AI
+          </h1>
+          <div class="hero-sub reveal" style="transition-delay: 0.13s">
+            Cigars, code, and community
+          </div>
+          <p class="lede reveal" style="transition-delay: 0.22s">
+            A free, in-person meetup in the Rio Grande Valley where students,
+            builders, and the curious learn to ship real software with AI. Bring a
+            laptop, bring an idea — we'll build together.
+          </p>
+          <div class="cta-row reveal" style="transition-delay: 0.28s">
+            <a
+              class="btn btn-primary btn-lg"
+              href="https://luma.com/5eyc7xuv"
+              target="_blank"
+              rel="noopener"
+              >Reserve your spot</a
+            >
+            <a class="btn btn-ghost btn-lg" href="#format">See the format</a>
+          </div>
+          <div class="hero-meta reveal" style="transition-delay: 0.34s">
+            <div class="hero-meta-item">Level<span>All skill levels</span></div>
+            <div class="hero-meta-item">
+              Language<span>EN / ES · Bilingual</span>
+            </div>
+            <div class="hero-meta-item">Cost<span>Always free</span></div>
+            <div class="hero-meta-item">
+              Venue<span>Cigar Society, Pharr TX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: art panel -->
+        <div class="hero-art reveal" style="transition-delay:.2s" aria-hidden="true">
+          <div class="dots-bg"></div>
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+          <div class="codecard">
+            <div class="clabel">build-with-ai.session</div>
+            <div class="crow"><span class="cm">// describe what you want</span></div>
+            <div class="crow"><b>build</b> "a sign-up form that emails me"</div>
+            <div class="crow"><span class="cm">// then ship it</span></div>
+            <div class="crow"><b>deploy</b> → <b>live</b> ✦</div>
           </div>
         </div>
       </div>

@@ -634,6 +634,7 @@
       }
 
       .sessions-scroller {
+        position: relative;
         display: flex;
         gap: 20px;
         overflow-x: auto;
@@ -1061,9 +1062,33 @@
           margin: 0 -24px;
           padding: 36px 24px;
         }
+        /* ── Sessions scroller: next date first ──── */
+        .sessions-scroller {
+          scroll-snap-type: x mandatory;
+          /* Fade right edge to hint at scrollable cards */
+          -webkit-mask-image: linear-gradient(
+            90deg,
+            #000 80%,
+            transparent 98%
+          );
+          mask-image: linear-gradient(
+            90deg,
+            #000 80%,
+            transparent 98%
+          );
+        }
         .session-card {
-          flex-basis: 85vw;
+          flex-basis: 82vw;
           padding: 28px 26px 26px;
+          scroll-snap-align: start;
+        }
+        .session-card.is-next {
+          order: -1;
+          flex-basis: 88vw;
+        }
+        .session-card.is-done {
+          flex-basis: 68vw;
+          opacity: 0.55;
         }
         .ses-day {
           font-size: 28px;
